@@ -26,6 +26,7 @@ public class PageController extends HttpServlet {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
 
+        // TODO: just fill out the body, don't do a redirect
         resp.sendRedirect(resp.encodeRedirectURL("/static/html/index.html"));
     }
 
