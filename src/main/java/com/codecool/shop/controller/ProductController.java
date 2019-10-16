@@ -20,6 +20,9 @@ import java.util.Map;
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends HttpServlet {
 
+    // echo ProductController 0.1.0 | sha1sum | head -c 15
+    public static final long serialVersionUID = 0x5006d2fa557d288L;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ProductDao productDataStore = ProductDaoMem.getInstance();
