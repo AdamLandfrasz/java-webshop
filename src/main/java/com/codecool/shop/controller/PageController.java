@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet(urlPatterns = {"/"})
-public class ProductController extends HttpServlet {
+public class PageController extends HttpServlet {
 
     // echo ProductController 0.1.0 | sha1sum | head -c 15
     public static final long serialVersionUID = 0x5006d2fa557d288L;
