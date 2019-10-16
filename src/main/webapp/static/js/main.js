@@ -1,17 +1,39 @@
 export function init() {
     window.addEventListener('DOMContentLoaded', (event) => {
-        const appRoot = document.getElementById('app');
-        const product = {
-            name: 'Phone',
-            description: `A simple phone.
+        showProductPage();
+    });
+}
+
+function showProductPage() {
+    const appRoot = document.getElementById('app');
+    const products = [{
+        name: 'Phone',
+        description: `A simple phone.
 
 It is very cool`,
-            price: 100,
-            picUrl: '/static/img/product_1.jpg'
-        };
-        const productElement = productToElement(product);
-        appRoot.appendChild(productElement);
-    });
+        price: 100,
+        picUrl: '/static/img/product_1.jpg'
+    }, {
+        name: 'Tablet',
+        description: `A very cool tablet.
+
+It can do everything.`,
+        price: 150,
+        picUrl: '/static/img/product_2.jpg'
+    }];
+    const productElements = products.map(productToElement);
+
+    const productContainer = document
+          .getElementById('product-container-template')
+          .content
+          .cloneNode(true);
+
+    const productGrid = productContainer.querySelector('.product-grid');
+
+    productElements.forEach(p => productGrid.appendChild(p));
+    productContainer.querySelector('.filter-criteria').innerText = 'All products';
+
+    appRoot.appendChild(productContainer);
 }
 
 function productToElement(product) {
