@@ -1,4 +1,9 @@
-export function showProductPage() {
+export function ProductView(routingManager) {
+    this.routingManager = routingManager;
+}
+
+ProductView.prototype.renderAll = function() {
+    this.routingManager.setRoute('/products/all');
     const appRoot = document.getElementById('app');
     const products = [{
         name: 'Phone',

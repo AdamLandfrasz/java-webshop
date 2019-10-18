@@ -1,9 +1,9 @@
-import {showProductPage} from './product/view.js';
+import {ProductView} from './product/view.js';
 
-export function init() {
-    window.addEventListener('DOMContentLoaded', (event) => {
-        showProductPage();
-    });
+function init(domReadyEvent) {
+    const routing = {setRoute: (newRoute) => history.replaceState({}, '', newRoute)};
+    const productView = new ProductView(routing);
+    productView.renderAll();
 }
 
-init();
+window.addEventListener('DOMContentLoaded', init);
