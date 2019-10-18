@@ -1,5 +1,6 @@
 export function ProductView(routingManager) {
     this.routingManager = routingManager;
+    routingManager.install('/products/all', this.renderAll);
 }
 
 ProductView.prototype.renderAll = function() {
