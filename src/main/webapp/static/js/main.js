@@ -1,8 +1,9 @@
+import {RoutingManager} from './routing/manager.js';
 import {ProductView} from './product/view.js';
 
 function init(domReadyEvent) {
-    const routing = {setRoute: (newRoute) => history.replaceState({}, '', newRoute)};
-    const productView = new ProductView(routing);
+    const routingManager = new RoutingManager(window.history);
+    const productView = new ProductView(routingManager);
     productView.renderAll();
 }
 
