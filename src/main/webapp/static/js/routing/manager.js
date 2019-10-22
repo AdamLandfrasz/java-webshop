@@ -1,6 +1,6 @@
 export function RoutingManager(history) {
     this.history = history;
-    this.matchers = {};
+    this.matchers = new Map();
 }
 
 RoutingManager.prototype.install = function(matcher, handler) {
@@ -10,9 +10,19 @@ RoutingManager.prototype.install = function(matcher, handler) {
     }
 
     // TODO: handle duplicates
-    this.matchers[key] = handler;
+    this.matchers.set(key, handler);
 }
 
 RoutingManager.prototype.setRoute = function(newRoute) {
     this.history.replaceState({}, '', newRoute);
+}
+
+RoutingManager.prototype.goTo = function(url) {
+    for (const [matcher, handler] of this.matchers) {
+        if(url.match(matcher)) {
+            handler();
+            return;
+        }
+    }
+    console.log(`no mather found for ${url}`);
 }
