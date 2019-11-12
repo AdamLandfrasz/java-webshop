@@ -41,10 +41,11 @@
     </div>
     <form action="/" method="GET">
         <select name="category" id="category-select" onchange="this.form.submit()">
-            <option value="1" th:selected="${selectedCategoryId == 1}">PS4</option>
-            <option value="2" th:selected="${selectedCategoryId == 2}">Xbox One</option>
-            <option value="3" th:selected="${selectedCategoryId == 3}">PC</option>
-            <option value="4" th:selected="${selectedCategoryId == 4}">Nintendo Switch</option>
+            <option th:each="category : ${categories}" th:value="${category.getId()}" th:text="${category.getName()}" th:selected="${selectedCategoryId == category.getId()}"></option>
+<!--            <option value="1" th:selected="${selectedCategoryId == 1}">PS4</option>-->
+<!--            <option value="2" th:selected="${selectedCategoryId == 2}">Xbox One</option>-->
+<!--            <option value="3" th:selected="${selectedCategoryId == 3}">PC</option>-->
+<!--            <option value="4" th:selected="${selectedCategoryId == 4}">Nintendo Switch</option>-->
         </select>
     </form>
     <div id="products" class="row">
