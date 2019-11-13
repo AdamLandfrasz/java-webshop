@@ -3,8 +3,10 @@ package com.codecool.shop.controller;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.implementation.CartDaoMem;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
+import com.codecool.shop.model.Cart;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -21,25 +23,19 @@ import java.util.Map;
 @WebServlet(urlPatterns = {"/cart"})
 public class CartHandler extends HttpServlet {
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-
-        Map<String, Integer> cart = new HashMap<>();
-
-        String name =  "asd";
-        String value =  "cart";
-
-        if (true)
-        {
-            Cookie cookie = new Cookie(name,value);
-            resp.addCookie(cookie);
+        CartDaoMem cartDataStore = CartDaoMem.getInstance();
+        Cart cart;
+        if (cartDataStore.find(req.getSession().getId()) == null) {
+            cartDataStore.add(new Cart(), req.getSession().getId());
+            cart = cartDataStore.find(req.getSession().getId());
         }
+        cart = cartDataStore.find(req.getSession().getId());
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
+        context.setVariable("cart", cart.getCart());
         // // Alternative setting of the template context
         // Map<String, Object> params = new HashMap<>();
         // params.put("category", productCategoryDataStore.find(1));

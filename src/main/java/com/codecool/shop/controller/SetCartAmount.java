@@ -7,6 +7,7 @@ import com.codecool.shop.dao.implementation.CartDaoMem;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.model.Cart;
+import com.codecool.shop.model.Product;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -22,8 +23,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(urlPatterns = {"/add-cart"})
-public class AddToCart extends HttpServlet {
+@WebServlet(urlPatterns = {"/set-cart"})
+public class SetCartAmount extends HttpServlet {
 
 
     @Override
@@ -33,14 +34,9 @@ public class AddToCart extends HttpServlet {
         ProductDaoMem productDataStore = ProductDaoMem.getInstance();
 
         Cart sessionCart = cartDataStore.find(req.getSession().getId());
-        if (sessionCart != null) {
-            sessionCart.addToCart(productDataStore.find(Integer.parseInt(req.getParameter("productId"))));
-        } else {
-            cartDataStore.add(new Cart(), req.getSession().getId());
-            sessionCart = cartDataStore.find(req.getSession().getId());
-            sessionCart.addToCart(productDataStore.find(Integer.parseInt(req.getParameter("productId"))));
-        }
-        System.out.println(sessionCart);
+        Product product = productDataStore.find(Integer.parseInt(req.getParameter("productId")));
+        Integer newAmount = Integer.parseInt(req.getParameter("newAmount"));
+        sessionCart.setProductAmount(product, newAmount);
     }
 
 }

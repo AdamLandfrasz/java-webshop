@@ -6,11 +6,10 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Cart extends BaseModel {
-    private Map<Product, Integer> cart;
+    private Map<Product, Integer> cart = new LinkedHashMap<>();
 
-    public Cart(String name) {
-        super(name);
-        this.cart = new LinkedHashMap<>();
+    public Cart() {
+        super("cart");
     }
 
     public Map<Product, Integer> getCart() {
