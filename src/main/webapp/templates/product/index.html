@@ -5,7 +5,10 @@
     <meta name="author" content="Codecool"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-    <title>Codecool Shop</title>
+    <title> WebStore </title>
+
+
+    <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon" />
 
     <!-- Bootstrap components -->
     <!-- Latest compiled and minified Jquery -->
@@ -34,7 +37,7 @@
 
 <body>
 
-<nav class="navbar fixed-top bg-light" id="top-row">
+<nav class="navbar fixed-top" id="top-row">
     <form action="/" method="GET">
         <select name="category" id="category-select" onchange="this.form.submit()">
             <option th:each="category : ${categories}" th:value="${category.getId()}" th:text="${category.getName()}"
@@ -42,8 +45,9 @@
         </select>
     </form>
     <div class=" text-center nav-item">
-        <h1>Codecool Shop
-        </h1>
+        <a href="/">
+        <img src="/static/img/nav_img.png" alt="navbar-img">
+        </a>
     </div>
     <a href="/cart">
         <button id="cart-icon" class="btn btn-danger">
