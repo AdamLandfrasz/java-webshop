@@ -61,6 +61,41 @@
     margin: 0 0 11px;
 }
 
+.container {
+    margin-top: 100px;
+}
+
+.card {
+    margin-bottom: 15px;
+}
+
+.card .card-header {
+    height: 270px;
+}
+
 .card img {
     max-height: 408px;
+}
+
+td img {
+    width: 100px;
+}
+
+#top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#cart-icon {
+    width: 65px;
+    height: 45px;
+}
+
+#cart-icon img {
+    color: white;
+}
+
+.footer-body {
+    text-align: center;
 }
