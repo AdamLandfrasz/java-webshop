@@ -8,6 +8,7 @@ import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.Product;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -22,8 +23,8 @@ import java.io.IOException;
 import javax.servlet.http.Cookie;
 import java.util.*;
 
-@WebServlet(urlPatterns = {"/set-cart"})
-public class SetCartAmount extends HttpServlet {
+@WebServlet(urlPatterns = {"/get-cart"})
+public class GetCart extends HttpServlet {
 
 
     @Override
@@ -31,28 +32,23 @@ public class SetCartAmount extends HttpServlet {
 
         CartDaoMem cartDataStore = CartDaoMem.getInstance();
         ProductDaoMem productDataStore = ProductDaoMem.getInstance();
-
-        Cart sessionCart = cartDataStore.find(req.getSession().getId());
-        Product product = productDataStore.find(Integer.parseInt(req.getParameter("productId")));
-        Integer newAmount = Integer.parseInt(req.getParameter("newAmount"));
-        sessionCart.setProductAmount(product, newAmount);
-
-        Map<Product, Integer> sessionMap = sessionCart.getCart();
+        Map<Product, Integer> sessionCart = cartDataStore.find(req.getSession().getId()).getCart();
         List<Map<String, String>> responseList = new ArrayList<>();
-
-        for (Product mapProduct : sessionMap.keySet()) {
+        for (Product product : sessionCart.keySet()) {
             HashMap<String, String> productMap = new HashMap<>();
-
-            productMap.put("id", String.valueOf(mapProduct.getId()));
-            productMap.put("name", mapProduct.getName());
-            productMap.put("price", String.valueOf(mapProduct.getDefaultPrice()));
-            productMap.put("amount", String.valueOf(sessionMap.get(mapProduct)));
+            productMap.put("id", String.valueOf(product.getId()));
+            productMap.put("name", product.getName());
+            productMap.put("price", String.valueOf(product.getDefaultPrice()));
+            productMap.put("amount", String.valueOf(sessionCart.get(product)));
 
             responseList.add(productMap);
         }
         Gson gson = new Gson();
         String jsonString = gson.toJson(responseList);
         resp.getWriter().println(jsonString);
+
+
+
     }
 
 }

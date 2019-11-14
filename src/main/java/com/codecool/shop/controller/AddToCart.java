@@ -7,6 +7,7 @@ import com.codecool.shop.dao.implementation.CartDaoMem;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.model.Cart;
+import com.google.gson.Gson;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -40,7 +41,9 @@ public class AddToCart extends HttpServlet {
             sessionCart = cartDataStore.find(req.getSession().getId());
             sessionCart.addToCart(productDataStore.find(Integer.parseInt(req.getParameter("productId"))));
         }
-        System.out.println(sessionCart);
+
+        Gson gson = new Gson();
+        resp.getWriter().println(gson.toJson("OK"));
     }
 
 }
