@@ -10,5 +10,5 @@ for (const addToCartButton of addToCartButtons) {
     });
 }
 
-dom.loadCart();
+dom.initCartInput();
 

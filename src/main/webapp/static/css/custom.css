@@ -96,6 +96,12 @@ td img {
     color: white;
 }
 
+.collapse-filter {
+    position: fixed;
+    left: 0;
+    top: 75px;
+}
+
 .footer-body {
     text-align: center;
 }
