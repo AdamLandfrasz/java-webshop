@@ -48,7 +48,7 @@
                 <th scope="col">Amount in cart</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="table-body-content">
             <tr th:each="prod, iterStat : ${cart}">
                 <td><img class="img-fluid" th:src="'/static/img/product_' + ${prod.getKey().getId()} + '.jpg'" alt=""></td>
                 <td th:text="${prod.getKey().getName()}">Name</td>

@@ -13,7 +13,10 @@ export let dataHandler = {
             method: 'GET',
             credentials: 'same-origin'
         })
-            .then(response => response.ok);
+            .then(response => response.ok)
+            .then(() => {
+
+            });
     },
     _api_post: function (url, data, callback) {
         // it is not called from outside
@@ -30,5 +33,24 @@ export let dataHandler = {
         })
             .then(response => response.json())
     .then(json_response => callback(json_response));
+    },
+
+    _api_get_with_resp: function (url, callback, secondCallback) {
+        fetch(url, {
+            method: 'GET',
+            credentials: 'same-origin'
+        })
+            .then(response => response.json())
+            .then(json_response => callback(json_response))
+            .then(secondCallback);
+    },
+
+    getCart: function (callback, secondCallback) {
+        this._api_get_with_resp(`/get-cart`, (response) => {
+            this._data = response;
+            callback(response);
+        }, () => {
+            secondCallback();
+        });
     }
 };
