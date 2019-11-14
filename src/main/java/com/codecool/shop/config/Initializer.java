@@ -33,6 +33,7 @@ public class Initializer implements ServletContextListener {
         Supplier nintendo = new Supplier("Nintendo Company", "Video game development");
         Supplier from = new Supplier("From Software", "Video game development");
         Supplier remedy = new Supplier("Remedy Entertainment", "Video game development");
+        Supplier capcom = new Supplier("Capcom", "Video game development");
 
         supplierDataStore.add(sony);
         supplierDataStore.add(rockstar);
@@ -43,6 +44,7 @@ public class Initializer implements ServletContextListener {
         supplierDataStore.add(nintendo);
         supplierDataStore.add(from);
         supplierDataStore.add(remedy);
+        supplierDataStore.add(capcom);
 
         //setting up a new product category
         ProductCategory ps4 = new ProductCategory("PlayStation 4", "Gaming Platform", "Gaming console developed and maintained by Sony Entertainment Inc.");
@@ -85,5 +87,11 @@ public class Initializer implements ServletContextListener {
         productDataStore.add(new Product("Sekiro: Shadows Die Twice", 59.99f, "EUR", "Explore late 1500s Sengoku Japan, a brutal period of constant life and death conflict, as you come face to face with larger than life foes in a dark and twisted world. Take Revenge. Restore your honor. Kill Ingeniously.", ps4, from));
         productDataStore.add(new Product("Sekiro: Shadows Die Twice", 59.99f, "EUR", "Explore late 1500s Sengoku Japan, a brutal period of constant life and death conflict, as you come face to face with larger than life foes in a dark and twisted world. Take Revenge. Restore your honor. Kill Ingeniously.", xBoxOne, from));
         productDataStore.add(new Product("Sekiro: Shadows Die Twice", 59.99f, "EUR", "Explore late 1500s Sengoku Japan, a brutal period of constant life and death conflict, as you come face to face with larger than life foes in a dark and twisted world. Take Revenge. Restore your honor. Kill Ingeniously.", pc, from));
+        productDataStore.add(new Product("Control", 59.99f, "EUR", "Take part in Jesse's supernatural action-adventure, that will challenge you to master the combination of supernatural abilities, modifiable loadouts, and reactive environments while fighting through a deep and unpredictable world.", ps4, remedy));
+        productDataStore.add(new Product("Control", 59.99f, "EUR", "Take part in Jesse's supernatural action-adventure, that will challenge you to master the combination of supernatural abilities, modifiable loadouts, and reactive environments while fighting through a deep and unpredictable world.", xBoxOne, remedy));
+        productDataStore.add(new Product("Control", 59.99f, "EUR", "Take part in Jesse's supernatural action-adventure, that will challenge you to master the combination of supernatural abilities, modifiable loadouts, and reactive environments while fighting through a deep and unpredictable world.", pc, remedy));
+        productDataStore.add(new Product("Devil May Cry 5", 59.99f, "EUR", "The Devil you know returns in this brand new entry in the over-the-top action series. Prepare to get downright demonic with this signature blend of high-octane stylized action and otherworldly & original characters the series is known for.", ps4, capcom));
+        productDataStore.add(new Product("Devil May Cry 5", 59.99f, "EUR", "The Devil you know returns in this brand new entry in the over-the-top action series. Prepare to get downright demonic with this signature blend of high-octane stylized action and otherworldly & original characters the series is known for.", xBoxOne, capcom));
+        productDataStore.add(new Product("Devil May Cry 5", 59.99f, "EUR", "The Devil you know returns in this brand new entry in the over-the-top action series. Prepare to get downright demonic with this signature blend of high-octane stylized action and otherworldly & original characters the series is known for.", pc, capcom));
     }
 }
