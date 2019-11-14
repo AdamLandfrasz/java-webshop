@@ -40,8 +40,8 @@
                 <configuration>
 <!--                     On some configs this causes shutdown of context on-->
 <!--                     a page load so disabled.-->
-                     <reload>automatic</reload>
-                     <scanIntervalSeconds>1</scanIntervalSeconds>
+<!--                     <reload>automatic</reload>-->
+<!--                     <scanIntervalSeconds>1</scanIntervalSeconds>-->
                 </configuration>
             </plugin>
         </plugins>

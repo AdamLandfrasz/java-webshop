@@ -128,6 +128,7 @@ td img {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    z-index: 60;
 }
 
 #cart-icon {
@@ -135,14 +136,24 @@ td img {
     height: 45px;
 }
 
-#cart-icon img {
-    color: white;
+#nav-icon {
+    width: 35px;
+    height: 35px;
 }
 
-.collapse-filter {
+.navbar-toggler {
+    padding: 0;
+}
+
+.filter {
     position: fixed;
     left: 0;
-    top: 75px;
+    top: 0;
+    padding: 150px 25px;
+    height: 100%;
+    overflow-x: hidden;
+    background-color: #ffefef;
+    z-index: 50;
 }
 
 .footer-b {
@@ -157,6 +168,19 @@ td img {
     background: #ffefef;
 }
 
-body {
-    min-height: 100vh;
+@media (max-width: 425px) {
+    #logo {
+        width: 180px;
+        height: 38px;
+    }
+
+    #cart-icon{
+        width: 55px;
+        height: 40px;
+    }
+
+    #nav-icon{
+        width: 30px;
+        height: 30px;
+    }
 }

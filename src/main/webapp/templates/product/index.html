@@ -36,15 +36,13 @@
 <body>
 
 <nav class="navbar fixed-top" id="top-row">
-    <form action="/" method="GET">
-        <select name="category" id="category-select" onchange="this.form.submit()">
-            <option th:each="category : ${categories}" th:value="${category.getId()}" th:text="${category.getName()}"
-                    th:selected="${selectedCategoryId == category.getId()}"></option>
-        </select>
-    </form>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+        <img id="nav-icon" src="/static/img/filter.png" alt="filter-toggle">
+    </button>
+
     <div class=" text-center nav-item">
         <a href="/">
-            <img src="/static/img/nav_img.png" alt="navbar-img">
+            <img id="logo" src="/static/img/nav_img.png" alt="navbar-img">
         </a>
     </div>
     <a href="/cart">
@@ -53,20 +51,11 @@
         </button>
     </a>
 </nav>
-<div class="container">
 
-<div class="jumbotron text-center">
-    <h1>Codecool Shop
-    </h1>
+<div class="flex-column nav-pills collapse filter" id="navbarToggleExternalContent" role="tablist" aria-orientation="horizontal">
+    <a th:each="category : ${categories}" th:text="${category.getName()}" th:class="${selectedCategoryId == category.getId() ? 'nav-link active' : 'nav-link'}" th:href="'/?category=' + ${category.getId()}" role="tab">Category</a>
 </div>
-<nav class="navbar navbar-light">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</nav>
-<div class="nav flex-column nav-pills collapse w-25" id="navbarToggleExternalContent" role="tablist" aria-orientation="vertical">
-    <a th:each="category : ${categories}" th:text="${category.getName()}" th:class="'w-50 ' + ${selectedCategoryId == category.getId() ? 'nav-link active' : 'nav-link'}" th:href="'/?category=' + ${category.getId()}" role="tab">Category</a>
-</div>
+
 <div class="container">
     <div id="products" class="row">
         <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3" th:each="prod,iterStat : ${products}">
