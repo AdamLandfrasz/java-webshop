@@ -34,20 +34,15 @@
     <h1>Codecool Shop
     </h1>
 </div>
-
+<nav class="navbar navbar-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</nav>
+<div class="nav flex-column nav-pills collapse w-25" id="navbarToggleExternalContent" role="tablist" aria-orientation="vertical">
+    <a th:each="category : ${categories}" th:text="${category.getName()}" th:class="'w-50 ' + ${selectedCategoryId == category.getId() ? 'nav-link active' : 'nav-link'}" th:href="'/?category=' + ${category.getId()}" role="tab">Category</a>
+</div>
 <div class="container">
-    <div class="card">
-        <strong th:text="${category.name}">Category Title</strong>
-    </div>
-    <form action="/" method="GET">
-        <select name="category" id="category-select" onchange="this.form.submit()">
-            <option th:each="category : ${categories}" th:value="${category.getId()}" th:text="${category.getName()}" th:selected="${selectedCategoryId == category.getId()}"></option>
-<!--            <option value="1" th:selected="${selectedCategoryId == 1}">PS4</option>-->
-<!--            <option value="2" th:selected="${selectedCategoryId == 2}">Xbox One</option>-->
-<!--            <option value="3" th:selected="${selectedCategoryId == 3}">PC</option>-->
-<!--            <option value="4" th:selected="${selectedCategoryId == 4}">Nintendo Switch</option>-->
-        </select>
-    </form>
     <div id="products" class="row">
         <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
             <div class="card">
