@@ -8,11 +8,11 @@ export let dom = {
         for (let product of cart) {
             tableContent +=
                 `<tr>
-                <td>
-                    <img class="img-fluid" src="/static/img/product_${product.id}.jpg" alt="">
+                <td class="text-center">
+                    <img class="img" src="/static/img/product_${product.id}.jpg" alt="">
                 </td>
-                <td>${product.name}</td>
-                <td>
+                <td class="align-middle">${product.name}</td>
+                <td class="align-middle text-center">
                     <input class="cart-input" data-id="${product.id}" value="${product.amount}"
                            type="number" required min="0" value="1">
                 </td>
@@ -28,12 +28,65 @@ export let dom = {
         for (const cartInputField of cartInputFields) {
 
             cartInputField.addEventListener('change', () => {
-                dataHandler._api_get(
-                    `/set-cart?productId=${cartInputField.dataset.id}&newAmount=${cartInputField.value}`,
-                    (response) => {
-                        dom.getCart(response);
-                    });
+                if (cartInputField.value !== "") {
+                    dataHandler._api_get(
+                        `/set-cart?productId=${cartInputField.dataset.id}&newAmount=${cartInputField.value}`,
+                        (response) => {
+                            dom.getCart(response);
+                        });
+                } else  {
+                    dataHandler._api_get(
+                        `/set-cart?productId=${cartInputField.dataset.id}&newAmount=${cartInputField.defaultValue}`,
+                        (response) => {
+                            dom.getCart(response);
+                        });
+                }
             });
         }
+    },
+
+    initAddToCartButtons: function () {
+        const addToCartButtons = document.querySelectorAll(".add-to-cart");
+        for (const addToCartButton of addToCartButtons) {
+            addToCartButton.addEventListener('click', () => {
+                dataHandler._api_get_no_callback(`/add-cart?productId=${addToCartButton.dataset.id}`);
+            });
+        }
+        dom.initAddCartImgHover();
+    },
+
+    initAddCartImgHover: function () {
+        $('.add-to-cart').on('click', function () {
+            let cart = $('#cart-icon');
+            let imgToDrag = $(this).parents('.card').find('img').eq(0);
+            if (imgToDrag) {
+                let imgClone = imgToDrag.clone()
+                    .offset({
+                        top: imgToDrag.offset().top,
+                        left: imgToDrag.offset().left
+                    })
+                    .css({
+                        'opacity': '0.5',
+                        'position': 'absolute',
+                        'height': '150px',
+                        'width': '150px',
+                        'z-index': '5000'
+                    })
+                    .appendTo($('body'))
+                    .animate({
+                        'top': cart.offset().top + 10,
+                        'left': cart.offset().left + 10,
+                        'width': 75,
+                        'height': 75
+                    }, 1000);
+
+                imgClone.animate({
+                    'width': 0,
+                    'height': 0
+                }, function () {
+                    $(this).detach()
+                });
+            }
+        });
     }
 };

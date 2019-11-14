@@ -7,7 +7,7 @@
 
     <title> WebStore </title>
 
-    <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon"/>
 
     <!-- Bootstrap components -->
     <!-- Latest compiled and minified Jquery -->
@@ -24,7 +24,7 @@
             integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
             crossorigin="anonymous"></script>
 
-    <script src="/static/js/main.js" type="module"></script>
+    <script src="/static/js/initCart.js" type="module"></script>
 
     <!-- Latest compiled and minified CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
@@ -41,21 +41,22 @@
         <img src="/static/img/nav_img.png" alt="navbar-img">
     </a>
 </nav>
-<div class="container">
-    <div id="products">
+<div class="container text-center">
+    <div class="table-responsive col-auto align-self-center">
         <table class="table table-bordered table-striped">
             <thead>
             <tr>
                 <th scope="col"></th>
                 <th scope="col">Product Name</th>
-                <th scope="col">Amount in cart</th>
+                <th scope="col" class="text-center">Amount in cart</th>
             </tr>
             </thead>
             <tbody id="table-body-content">
             <tr th:each="prod, iterStat : ${cart}">
-                <td><img class="img-fluid" th:src="'/static/img/product_' + ${prod.getKey().getId()} + '.jpg'" alt=""></td>
-                <td th:text="${prod.getKey().getName()}">Name</td>
-                <td><input class="cart-input" th:data-id="${prod.getKey().getId()}" th:value="${prod.getValue()}"
+                <td class="text-center"><img class="img" th:src="'/static/img/product_' + ${prod.getKey().getId()} + '.jpg'" alt="">
+                </td>
+                <td class="align-middle" th:text="${prod.getKey().getName()}">Name</td>
+                <td class="align-middle text-center"><input class="cart-input" th:data-id="${prod.getKey().getId()}" th:value="${prod.getValue()}"
                            type="number" required min="0" value="1"></td>
             </tr>
             </tbody>
@@ -64,8 +65,5 @@
     </div>
 
 </div>
-
-<div th:replace="footer.html :: copy"></div>
-
 </body>
 </html>

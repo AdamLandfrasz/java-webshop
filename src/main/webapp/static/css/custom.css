@@ -123,6 +123,7 @@ td img {
     width: 100px;
 }
 
+
 #top-row {
     display: flex;
     align-items: center;
@@ -154,4 +155,8 @@ td img {
 
 .navbar {
     background: #ffefef;
+}
+
+body {
+    min-height: 100vh;
 }
