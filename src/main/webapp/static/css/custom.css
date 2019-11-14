@@ -33,10 +33,7 @@
 {
     margin-bottom: 0px;
 }
-.item.list-group-item .caption
-{
-    padding: 9px 9px 0px 9px;
-}
+
 .item.list-group-item:nth-of-type(odd)
 {
     background: #eeeeee;
@@ -67,6 +64,19 @@
 
 .card {
     margin-bottom: 15px;
+    height: 725px;
+}
+
+.card-b {
+    height: 30px;
+    display: flex;
+    margin: auto;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.lead {
+    margin: 5px;
 }
 
 .card .card-header {
@@ -74,7 +84,7 @@
 }
 
 .card img {
-    max-height: 408px;
+    height: 408px;
 }
 
 td img {
@@ -96,8 +106,12 @@ td img {
     color: white;
 }
 
-.footer-body {
+.footer-b {
+    align-content: center;
     text-align: center;
+    margin: auto;
+    padding: auto;
+    border-top: #000000 1px solid;
 }
 
 .navbar {
