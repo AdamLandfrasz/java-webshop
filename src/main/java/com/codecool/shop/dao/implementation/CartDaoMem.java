@@ -2,11 +2,8 @@ package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.model.Cart;
-import com.codecool.shop.model.ProductCategory;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class CartDaoMem implements CartDao {
@@ -16,7 +13,6 @@ public class CartDaoMem implements CartDao {
 
     private CartDaoMem() {
     }
-
 
     public static CartDaoMem getInstance() {
         if (instance == null) {
