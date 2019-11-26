@@ -2,6 +2,7 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.implementationWithJDBC.ProductDaoMemJDBC;
 import com.codecool.shop.dao.implementationWithList.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementationWithList.ProductDaoMem;
 import com.codecool.shop.config.TemplateEngineUtil;
