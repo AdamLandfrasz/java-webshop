@@ -43,10 +43,10 @@ INSERT INTO supplier(name, description, products) VALUES ('Remedy Entertainment'
 INSERT INTO supplier(name, description, products) VALUES ('Capcom', 'Video game development', '{10}');
 
 
-INSERT INTO product_category(name, description, department, products) VALUES ('PlayStation 4', 'Gaming Platform', 'Gaming console developed and maintained by Sony Entertainment Inc.', '{1}');
-INSERT INTO product_category(name, description, department, products) VALUES ('XboxOne', 'Gaming Platform', 'Gaming console developed and maintained by Microsoft.', '{1}');
-INSERT INTO product_category(name, description, department, products) VALUES ('PC', 'Gaming Platform', 'Personal computer.', '{1}');
-INSERT INTO product_category(name, description, department, products) VALUES ('Nintendo Switch', 'Gaming Platform', 'Gaming console developed and maintained by Nintendo.', '{1}');
+INSERT INTO product_category(name, description, department, products) VALUES ('PlayStation 4', 'Gaming Platform', 'Gaming console developed and maintained by Sony Entertainment Inc.', '{1,2,3,5,8,11,16,17,18,19,20,23,26,27,30,33}');
+INSERT INTO product_category(name, description, department, products) VALUES ('XboxOne', 'Gaming Platform', 'Gaming console developed and maintained by Microsoft.', '{6,9,12,21,24,28,31,34}');
+INSERT INTO product_category(name, description, department, products) VALUES ('PC', 'Gaming Platform', 'Personal computer.', '{4,7,10,13,22,25,29,32,35}');
+INSERT INTO product_category(name, description, department, products) VALUES ('Nintendo Switch', 'Gaming Platform', 'Gaming console developed and maintained by Nintendo.', '{14,15}');
 
 
 INSERT INTO product(name, description, default_price, default_currency, product_category, supplier) VALUES ('God of War', 'Journey into the fearsome Norse wilds where Kratos must master his legendary rage - not only to learn from his bloody past... but to give his son a future.', 59.99, 'EUR', 1, 1);
