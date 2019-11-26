@@ -75,7 +75,7 @@ public class ProductDaoMemJDBC implements ProductDao {
     private void executeQuery(String query) {
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query);
-        ){
+        ) {
             statement.execute(query);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -83,13 +83,16 @@ public class ProductDaoMemJDBC implements ProductDao {
     }
 
     private Product createNewInstance(ResultSet resultSet) throws SQLException {
-        return new Product(
+        Product product = new Product(
                 resultSet.getString("name"),
                 resultSet.getFloat("default_price"),
                 resultSet.getString("default_currency"),
                 resultSet.getString("description"),
                 ProductCategoryDaoMem.getInstance().find(resultSet.getInt("product_category")),
                 SupplierDaoMem.getInstance().find(resultSet.getInt("supplier")));
+
+        product.setId(resultSet.getInt("id"));
+        return product;
     }
 
     private List<Product> getResults(String query) {
@@ -98,7 +101,7 @@ public class ProductDaoMemJDBC implements ProductDao {
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query);
              ResultSet resultSet = statement.executeQuery()
-        ){
+        ) {
             while (resultSet.next()) {
                 resultList.add(createNewInstance(resultSet));
             }
