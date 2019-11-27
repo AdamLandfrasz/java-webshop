@@ -29,13 +29,6 @@ public class ProductDaoJDBC implements ProductDao {
         return instance;
     }
 
-    private List<Product> getProducts() {
-        if (products.isEmpty()) {
-            products = getAll();
-        }
-        return products;
-    }
-
     @Override
     public void add(Product product) {
         String query = "";
@@ -50,23 +43,25 @@ public class ProductDaoJDBC implements ProductDao {
 
     @Override
     public Product find(int id) {
-        return getProducts().stream().filter(t -> t.getId() == id).findFirst().orElse(null);
+        return getAll().stream().filter(t -> t.getId() == id).findFirst().orElse(null);
     }
 
     @Override
     public List<Product> getBy(Supplier supplier) {
-        return getProducts().stream().filter(t -> t.getSupplier().equals(supplier)).collect(Collectors.toList());
+        return getAll().stream().filter(t -> t.getSupplier().equals(supplier)).collect(Collectors.toList());
     }
 
     @Override
     public List<Product> getBy(ProductCategory productCategory) {
-        return getProducts().stream().filter(t -> t.getProductCategory().equals(productCategory)).collect(Collectors.toList());
+        return getAll().stream().filter(t -> t.getProductCategory().equals(productCategory)).collect(Collectors.toList());
     }
 
     @Override
     public List<Product> getAll() {
-        String query = "SELECT * FROM product";
-        return fetchAll(query);
+        if (products.isEmpty()) {
+            products = fetchAll();
+        }
+        return products;
     }
 
     private Product createNewInstanceFromDB(ResultSet resultSet) throws SQLException {
@@ -82,11 +77,11 @@ public class ProductDaoJDBC implements ProductDao {
         return product;
     }
 
-    private List<Product> fetchAll(String query) {
+    private List<Product> fetchAll() {
         List<Product> resultList = new ArrayList<>();
 
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query);
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM product");
              ResultSet resultSet = statement.executeQuery()
         ) {
             while (resultSet.next()) {

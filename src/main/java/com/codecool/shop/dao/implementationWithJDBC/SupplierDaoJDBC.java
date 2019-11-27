@@ -25,13 +25,6 @@ public class SupplierDaoJDBC implements SupplierDao {
         return instance;
     }
 
-    private List<Supplier> getSuppliers() {
-        if (suppliers.isEmpty()) {
-            suppliers = getAll();
-        }
-        return suppliers;
-    }
-
     @Override
     public void add(Supplier supplier) {
         String query = "";
@@ -46,13 +39,15 @@ public class SupplierDaoJDBC implements SupplierDao {
 
     @Override
     public Supplier find(int id) {
-        return getSuppliers().stream().filter(supplier -> supplier.getId() == id).findFirst().orElse(null);
+        return getAll().stream().filter(supplier -> supplier.getId() == id).findFirst().orElse(null);
     }
 
     @Override
     public List<Supplier> getAll() {
-        String query = "SELECT * FROM supplier";
-        return fetchAll(query);
+        if (suppliers.isEmpty()) {
+            suppliers = fetchAll();
+        }
+        return suppliers;
     }
 
     private Supplier createNewInstanceFromDB(ResultSet resultSet) throws SQLException {
@@ -64,11 +59,11 @@ public class SupplierDaoJDBC implements SupplierDao {
         return supplier;
     }
 
-    private List<Supplier> fetchAll(String query) {
+    private List<Supplier> fetchAll() {
         List<Supplier> resultList = new ArrayList<>();
 
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query);
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM supplier");
              ResultSet resultSet = statement.executeQuery()
         ) {
             while (resultSet.next()) {
