@@ -11,9 +11,11 @@ import com.codecool.shop.model.Supplier;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProductDaoJDBC implements ProductDao {
     private static ProductDaoJDBC instance = null;
+    private List<Product> products = new ArrayList<>();
 
     private ProductDaoJDBC() {
     }
@@ -25,34 +27,43 @@ public class ProductDaoJDBC implements ProductDao {
         return instance;
     }
 
-    @Override
-    public void add(Product product) {
+    private List<Product> getProducts() {
+        if (products.isEmpty()) {
+            products = getAll();
+        }
+        return products;
     }
 
     @Override
-    public Product find(int id) {
-        return fetchOne("SELECT * FROM product WHERE id=" + id);
+    public void add(Product product) {
+        String query = "";
+        ConnectionUtil.executeQuery(query);
     }
 
     @Override
     public void remove(int id) {
+        String query = "";
+        ConnectionUtil.executeQuery(query);
+    }
+
+    @Override
+    public Product find(int id) {
+        return getProducts().stream().filter(t -> t.getId() == id).findFirst().orElse(null);
+    }
+
+    @Override
+    public List<Product> getBy(Supplier supplier) {
+        return getProducts().stream().filter(t -> t.getSupplier().equals(supplier)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Product> getBy(ProductCategory productCategory) {
+        return getProducts().stream().filter(t -> t.getProductCategory().equals(productCategory)).collect(Collectors.toList());
     }
 
     @Override
     public List<Product> getAll() {
         String query = "SELECT * FROM product";
-        return fetchAll(query);
-    }
-
-    @Override
-    public List<Product> getBy(Supplier supplier) {
-        String query = "SELECT * FROM product WHERE supplier=" + supplier.getId();
-        return fetchAll(query);
-    }
-
-    @Override
-    public List<Product> getBy(ProductCategory productCategory) {
-        String query = "SELECT * FROM product WHERE product_category =" + productCategory.getId();
         return fetchAll(query);
     }
 
@@ -84,30 +95,5 @@ public class ProductDaoJDBC implements ProductDao {
         }
 
         return resultList;
-    }
-
-    private Product fetchOne(String query) {
-        Product resultItem = null;
-
-        try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query);
-             ResultSet resultSet = statement.executeQuery()
-        ) {
-            resultItem = createNewInstanceFromDB(resultSet);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return resultItem;
-    }
-
-    private void executeQuery(String query) {
-        try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)
-        ) {
-            statement.execute(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 }
