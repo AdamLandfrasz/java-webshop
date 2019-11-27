@@ -13,6 +13,7 @@ import java.util.List;
 
 public class SupplierDaoJDBC implements SupplierDao {
     private static SupplierDaoJDBC instance = null;
+    private List<Supplier> suppliers = new ArrayList<>();
 
     private SupplierDaoJDBC() {
     }
@@ -24,24 +25,34 @@ public class SupplierDaoJDBC implements SupplierDao {
         return instance;
     }
 
-    @Override
-    public void add(Supplier supplier) {
-
+    private List<Supplier> getSuppliers() {
+        if (suppliers.isEmpty()) {
+            suppliers = getAll();
+        }
+        return suppliers;
     }
 
     @Override
-    public Supplier find(int id) {
-        return null;
+    public void add(Supplier supplier) {
+        String query = "";
+        ConnectionUtil.executeQuery(query);
     }
 
     @Override
     public void remove(int id) {
+        String query = "";
+        ConnectionUtil.executeQuery(query);
+    }
 
+    @Override
+    public Supplier find(int id) {
+        return getSuppliers().stream().filter(supplier -> supplier.getId() == id).findFirst().orElse(null);
     }
 
     @Override
     public List<Supplier> getAll() {
-        return null;
+        String query = "SELECT * FROM supplier";
+        return fetchAll(query);
     }
 
     private Supplier createNewInstanceFromDB(ResultSet resultSet) throws SQLException {
@@ -53,7 +64,7 @@ public class SupplierDaoJDBC implements SupplierDao {
         return supplier;
     }
 
-    private List<Supplier> getResults(String query) {
+    private List<Supplier> fetchAll(String query) {
         List<Supplier> resultList = new ArrayList<>();
 
         try (Connection connection = ConnectionUtil.getConnection();

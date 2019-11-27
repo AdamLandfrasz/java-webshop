@@ -18,12 +18,11 @@ public class CartHandler extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         CartDaoMem cartDataStore = CartDaoMem.getInstance();
-        Cart cart;
 
         if (cartDataStore.find(req.getSession().getId()) == null) {
             cartDataStore.add(new Cart(), req.getSession().getId());
         }
-        cart = cartDataStore.find(req.getSession().getId());
+        Cart cart = cartDataStore.find(req.getSession().getId());
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());

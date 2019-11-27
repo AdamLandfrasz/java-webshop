@@ -74,7 +74,7 @@ public class ProductDaoJDBC implements ProductDao {
                 resultSet.getString("default_currency"),
                 resultSet.getString("description"),
                 ProductCategoryDaoMem.getInstance().find(resultSet.getInt("product_category")),
-                SupplierDaoMem.getInstance().find(resultSet.getInt("supplier")));
+                SupplierDaoJDBC.getInstance().find(resultSet.getInt("supplier")));
 
         product.setId(resultSet.getInt("id"));
         return product;
