@@ -20,4 +20,4 @@ target/
 hs_err_pid*
 
 #connection properties file to be individually filled
-/src/main/resources/connection.properties
+src/main/resources/connection.properties
