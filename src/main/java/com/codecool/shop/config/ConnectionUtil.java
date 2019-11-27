@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
 
@@ -20,5 +21,15 @@ public class ConnectionUtil {
                 String.format("jdbc:postgresql://%s/%s", properties.getProperty("url"), properties.getProperty("db")),
                 properties.getProperty("user"),
                 properties.getProperty("pw"));
+    }
+
+    public static void executeQuery(String query) {
+        try (Connection connection = ConnectionUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)
+        ) {
+            statement.execute(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
