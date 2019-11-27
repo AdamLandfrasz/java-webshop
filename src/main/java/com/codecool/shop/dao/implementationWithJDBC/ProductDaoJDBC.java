@@ -3,12 +3,14 @@ package com.codecool.shop.dao.implementationWithJDBC;
 import com.codecool.shop.config.ConnectionUtil;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementationWithList.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementationWithList.SupplierDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
