@@ -1,5 +1,6 @@
 package com.codecool.shop.dao.implementationWithJDBC;
 
+import com.codecool.shop.config.ConnectionUtil;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementationWithList.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementationWithList.SupplierDaoMem;
@@ -7,13 +8,9 @@ import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 public class ProductDaoJDBC implements ProductDao {
     private static ProductDaoJDBC instance = null;
@@ -59,30 +56,7 @@ public class ProductDaoJDBC implements ProductDao {
         return getResults(query);
     }
 
-    private Connection getConnection() throws SQLException {
-        Properties properties = new Properties();
-        try (InputStream input = new FileInputStream("src/main/resources/connection.properties")) {
-            properties.load(input);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return DriverManager.getConnection(
-                String.format("jdbc:postgresql://%s/%s", properties.getProperty("url"), properties.getProperty("db")),
-                properties.getProperty("user"),
-                properties.getProperty("pw"));
-    }
-
-    private void executeQuery(String query) {
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)
-        ) {
-            statement.execute(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private Product createNewInstance(ResultSet resultSet) throws SQLException {
+    private Product createNewInstanceFromDB(ResultSet resultSet) throws SQLException {
         Product product = new Product(
                 resultSet.getString("name"),
                 resultSet.getFloat("default_price"),
@@ -98,17 +72,27 @@ public class ProductDaoJDBC implements ProductDao {
     private List<Product> getResults(String query) {
         List<Product> resultList = new ArrayList<>();
 
-        try (Connection connection = getConnection();
+        try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(query);
              ResultSet resultSet = statement.executeQuery()
         ) {
             while (resultSet.next()) {
-                resultList.add(createNewInstance(resultSet));
+                resultList.add(createNewInstanceFromDB(resultSet));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         return resultList;
+    }
+
+    private void executeQuery(String query) {
+        try (Connection connection = ConnectionUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)
+        ) {
+            statement.execute(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
