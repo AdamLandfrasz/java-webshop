@@ -15,15 +15,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class ProductDaoMemJDBC implements ProductDao {
-    private static ProductDaoMemJDBC instance = null;
+public class ProductDaoJDBC implements ProductDao {
+    private static ProductDaoJDBC instance = null;
 
-    private ProductDaoMemJDBC() {
+    private ProductDaoJDBC() {
     }
 
-    public static ProductDaoMemJDBC getInstance() {
+    public static ProductDaoJDBC getInstance() {
         if (instance == null) {
-            instance = new ProductDaoMemJDBC();
+            instance = new ProductDaoJDBC();
         }
         return instance;
     }
@@ -74,7 +74,7 @@ public class ProductDaoMemJDBC implements ProductDao {
 
     private void executeQuery(String query) {
         try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(query);
+             PreparedStatement statement = connection.prepareStatement(query)
         ) {
             statement.execute(query);
         } catch (SQLException e) {

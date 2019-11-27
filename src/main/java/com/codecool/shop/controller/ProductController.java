@@ -2,9 +2,8 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.implementationWithJDBC.ProductDaoMemJDBC;
+import com.codecool.shop.dao.implementationWithJDBC.ProductDaoJDBC;
 import com.codecool.shop.dao.implementationWithList.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementationWithList.ProductDaoMem;
 import com.codecool.shop.config.TemplateEngineUtil;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -21,7 +20,7 @@ public class ProductController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProductDao productDataStore = ProductDaoMemJDBC.getInstance();
+        ProductDao productDataStore = ProductDaoJDBC.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
 
         int categoryId;

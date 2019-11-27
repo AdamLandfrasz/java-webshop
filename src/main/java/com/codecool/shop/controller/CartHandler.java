@@ -22,7 +22,6 @@ public class CartHandler extends HttpServlet {
         Cart cart;
         if (cartDataStore.find(req.getSession().getId()) == null) {
             cartDataStore.add(new Cart(), req.getSession().getId());
-            cart = cartDataStore.find(req.getSession().getId());
         }
         cart = cartDataStore.find(req.getSession().getId());
 
