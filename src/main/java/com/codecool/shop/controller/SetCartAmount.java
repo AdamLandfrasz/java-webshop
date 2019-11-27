@@ -1,5 +1,7 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.dao.CartDao;
+import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementationWithList.CartDaoMem;
 import com.codecool.shop.dao.implementationWithList.ProductDaoMem;
 import com.codecool.shop.model.Cart;
@@ -21,8 +23,8 @@ public class SetCartAmount extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        CartDaoMem cartDataStore = CartDaoMem.getInstance();
-        ProductDaoMem productDataStore = ProductDaoMem.getInstance();
+        CartDao cartDataStore = CartDaoMem.getInstance();
+        ProductDao productDataStore = ProductDaoMem.getInstance();
         Gson gson = new Gson();
 
         Cart sessionCart = cartDataStore.find(req.getSession().getId());
@@ -50,5 +52,4 @@ public class SetCartAmount extends HttpServlet {
         String jsonString = gson.toJson(responseList);
         resp.getWriter().println(jsonString);
     }
-
 }

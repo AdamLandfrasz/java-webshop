@@ -31,7 +31,7 @@ public class ProductDaoJDBC implements ProductDao {
 
     @Override
     public Product find(int id) {
-        return null;
+        return fetchOne("SELECT * FROM product WHERE id=" + id);
     }
 
     @Override
@@ -41,19 +41,19 @@ public class ProductDaoJDBC implements ProductDao {
     @Override
     public List<Product> getAll() {
         String query = "SELECT * FROM product";
-        return getResults(query);
+        return fetchAll(query);
     }
 
     @Override
     public List<Product> getBy(Supplier supplier) {
         String query = "SELECT * FROM product WHERE supplier=" + supplier.getId();
-        return getResults(query);
+        return fetchAll(query);
     }
 
     @Override
     public List<Product> getBy(ProductCategory productCategory) {
         String query = "SELECT * FROM product WHERE product_category =" + productCategory.getId();
-        return getResults(query);
+        return fetchAll(query);
     }
 
     private Product createNewInstanceFromDB(ResultSet resultSet) throws SQLException {
@@ -69,7 +69,7 @@ public class ProductDaoJDBC implements ProductDao {
         return product;
     }
 
-    private List<Product> getResults(String query) {
+    private List<Product> fetchAll(String query) {
         List<Product> resultList = new ArrayList<>();
 
         try (Connection connection = ConnectionUtil.getConnection();
@@ -84,6 +84,21 @@ public class ProductDaoJDBC implements ProductDao {
         }
 
         return resultList;
+    }
+
+    private Product fetchOne(String query) {
+        Product resultItem = null;
+
+        try (Connection connection = ConnectionUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()
+        ) {
+            resultItem = createNewInstanceFromDB(resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return resultItem;
     }
 
     private void executeQuery(String query) {
