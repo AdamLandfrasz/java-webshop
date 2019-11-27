@@ -136,6 +136,11 @@ td img {
     height: 45px;
 }
 
+#cart-icon img {
+    width: 80%;
+    height: 80%;
+}
+
 #nav-icon {
     width: 35px;
     height: 35px;
