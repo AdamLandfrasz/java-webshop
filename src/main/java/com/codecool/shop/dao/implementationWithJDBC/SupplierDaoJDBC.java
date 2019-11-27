@@ -2,18 +2,14 @@ package com.codecool.shop.dao.implementationWithJDBC;
 
 import com.codecool.shop.config.ConnectionUtil;
 import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.implementationWithList.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementationWithList.SupplierDaoMem;
-import com.codecool.shop.model.Product;
 import com.codecool.shop.model.Supplier;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 public class SupplierDaoJDBC implements SupplierDao {
     private static SupplierDaoJDBC instance = null;
@@ -45,7 +41,7 @@ public class SupplierDaoJDBC implements SupplierDao {
 
     @Override
     public List<Supplier> getAll() {
-        ;
+        return null;
     }
 
     private Supplier createNewInstanceFromDB(ResultSet resultSet) throws SQLException {
