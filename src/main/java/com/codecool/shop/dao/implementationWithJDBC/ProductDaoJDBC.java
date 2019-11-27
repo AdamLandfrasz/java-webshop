@@ -34,7 +34,7 @@ public class ProductDaoJDBC implements ProductDao {
 
     @Override
     public Product find(int id) {
-        return null;
+        return getResults("SELECT * FROM product WHERE id=" + id).get(0);
     }
 
     @Override
