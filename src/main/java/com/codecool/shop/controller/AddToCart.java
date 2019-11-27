@@ -23,14 +23,12 @@ public class AddToCart extends HttpServlet {
         CartDao cartDataStore = CartDaoMem.getInstance();
         ProductDao productDataStore = ProductDaoJDBC.getInstance();
 
-        Cart sessionCart = cartDataStore.find(req.getSession().getId());
-        if (sessionCart != null) {
-            sessionCart.addToCart(productDataStore.find(Integer.parseInt(req.getParameter("productId"))));
-        } else {
+        if (cartDataStore.find(req.getSession().getId()) == null) {
             cartDataStore.add(new Cart(), req.getSession().getId());
-            sessionCart = cartDataStore.find(req.getSession().getId());
-            sessionCart.addToCart(productDataStore.find(Integer.parseInt(req.getParameter("productId"))));
         }
+
+        Cart cart = cartDataStore.find(req.getSession().getId());
+        cart.addToCart(productDataStore.find(Integer.parseInt(req.getParameter("productId"))));
 
         Gson gson = new Gson();
         resp.getWriter().println(gson.toJson("OK"));

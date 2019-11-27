@@ -21,7 +21,6 @@ public class Cart extends BaseModel {
         if (this.cart.get(product) <= 0) {
             this.cart.remove(product);
         }
-
     }
 
     public void addToCart(Product product) {
