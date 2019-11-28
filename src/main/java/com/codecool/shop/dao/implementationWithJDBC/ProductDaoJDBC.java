@@ -2,7 +2,6 @@ package com.codecool.shop.dao.implementationWithJDBC;
 
 import com.codecool.shop.config.ConnectionUtil;
 import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.implementationWithList.ProductCategoryDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
@@ -13,11 +12,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ProductDaoJDBC implements ProductDao {
     private static ProductDaoJDBC instance = null;
-    private List<Product> products = new ArrayList<>();
 
     private ProductDaoJDBC() {
     }
@@ -43,25 +40,26 @@ public class ProductDaoJDBC implements ProductDao {
 
     @Override
     public Product find(int id) {
-        return getAll().stream().filter(t -> t.getId() == id).findFirst().orElse(null);
+        String query = "SELECT * FROM product WHERE id = " + id;
+        return fetchAll(query).get(0);
     }
 
     @Override
     public List<Product> getBy(Supplier supplier) {
-        return getAll().stream().filter(t -> t.getSupplier().equals(supplier)).collect(Collectors.toList());
+        String query = "SELECT * FROM product WHERE supplier =" + supplier.getId();
+        return fetchAll(query);
     }
 
     @Override
     public List<Product> getBy(ProductCategory productCategory) {
-        return getAll().stream().filter(t -> t.getProductCategory().equals(productCategory)).collect(Collectors.toList());
+        String query = "SELECT * FROM product WHERE product_category =" + productCategory.getId();
+        return fetchAll(query);
     }
 
     @Override
     public List<Product> getAll() {
-        if (products.isEmpty()) {
-            products = fetchAll();
-        }
-        return products;
+        String query = "SELECT * FROM product";
+        return fetchAll(query);
     }
 
     private Product createNewInstanceFromDB(ResultSet resultSet) throws SQLException {
@@ -77,11 +75,11 @@ public class ProductDaoJDBC implements ProductDao {
         return product;
     }
 
-    private List<Product> fetchAll() {
+    private List<Product> fetchAll(String query) {
         List<Product> resultList = new ArrayList<>();
 
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM product");
+             PreparedStatement statement = connection.prepareStatement(query);
              ResultSet resultSet = statement.executeQuery()
         ) {
             while (resultSet.next()) {
