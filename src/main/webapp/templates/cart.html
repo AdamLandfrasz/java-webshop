@@ -36,10 +36,8 @@
 
 <body>
 
-<nav class="navbar fixed-top" id="top-row">
-    <a href="/">
-        <img id="logo" src="/static/img/nav_img.png" alt="navbar-img">
-    </a>
+<nav class="navbar fixed-top navbar-dark" id="top-row">
+    <a href="/" class="navbar-brand text-center">A.C.E WEBSHOP</a>
 </nav>
 <div class="container text-center">
     <div class="table-responsive col-auto align-self-center">
@@ -66,30 +64,31 @@
                                                             th:value="${prod.getValue()}"
                                                             type="number" required min="0" value="1"></td>
                 <td class="align-middle"
-                    th:text="${#numbers.formatDecimal(prod.getKey().getDefaultPrice()*prod.getValue(),0,2,'POINT')+' '+prod.getKey().getDefaultCurrency()}">
+                    th:text="${#numbers.formatDecimal(prod.getKey().getDefaultPrice()*prod.getValue(),1,2,'POINT')+' '+prod.getKey().getDefaultCurrency()}">
                     Price
                 </td>
             </tr>
             <tr>
                 <td colspan="5"></td>
             </tr>
-            <tr >
+            <tr>
                 <td colspan="3"></td>
                 <td class="align-middle">Summed Price:</td>
-                <td class="align-middle" th:text="${summedPrice + ' EUR'}"></td>
-            </tr>
-            <td colspan="4"></td>
-            <td class="align-middle">
-                <div>
-                    <a href="/cart/checkout">
-                        <button id="continue" class="btn btn-danger">
-                            Continue
-                        </button>
-                    </a>
-                </div>
-
+                <td class="align-middle" th:text="${#numbers.formatDecimal(summedPrice,1,2,'POINT') + ' EUR'}">0 EUR</td>
             </tr>
             </tbody>
+            <tr class="bg-light">
+                <td colspan="4"></td>
+                <td class="align-middle">
+                    <div>
+                        <a href="/cart/checkout">
+                            <button id="continue" class="btn btn-danger">
+                                Continue
+                            </button>
+                        </a>
+                    </div>
+                </td>
+            </tr>
         </table>
 
     </div>

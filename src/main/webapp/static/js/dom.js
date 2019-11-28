@@ -4,22 +4,33 @@ export let dom = {
     getCart: function (response) {
         let cart = response;
         let tableContent = '';
+        const sumPrice = {sum: 0.00};
 
         for (let product of cart) {
+            sumPrice.sum += product.price * product.amount;
             tableContent +=
                 `<tr>
-                <td class="text-center">
-                    <img class="img" src="/static/img/product_${product.id}.jpg" alt="">
-                </td>
-                <td class="align-middle">${product.name}</td>
-                <td class="align-middle">${product.price + " EUR"}</td>
-                <td class="align-middle text-center">
-                    <input class="cart-input" data-id="${product.id}" value="${product.amount}"
-                           type="number" required min="0" value="1">
-                </td>
-                <td class="align-middle">${product.price*product.amount + " EUR"}</td>
+                    <td class="text-center">
+                        <img class="img" src="/static/img/product_${product.id}.jpg" alt="">
+                    </td>
+                    <td class="align-middle">${product.name}</td>
+                    <td class="align-middle">${product.price + " EUR"}</td>
+                    <td class="align-middle text-center">
+                        <input class="cart-input" data-id="${product.id}" value="${product.amount}"
+                               type="number" required min="0" value="1">
+                    </td>
+                    <td class="align-middle">${(product.price * product.amount).toFixed(2)} EUR</td>
                 </tr>`
         }
+        tableContent +=
+            `<tr>
+                <td colspan="5"></td>
+            </tr>
+            <tr>
+                <td colspan="3"></td>
+                <td class="align-middle">Summed Price:</td>
+                <td class="align-middle">${sumPrice.sum.toFixed(2)} EUR</td>
+            </tr>`;
         document.getElementById("table-body-content").innerHTML = tableContent;
         dom.initCartInput();
     },
@@ -36,7 +47,7 @@ export let dom = {
                         (response) => {
                             dom.getCart(response);
                         });
-                } else  {
+                } else {
                     dataHandler._api_get(
                         `/set-cart?productId=${cartInputField.dataset.id}&newAmount=${cartInputField.defaultValue}`,
                         (response) => {
@@ -59,7 +70,7 @@ export let dom = {
 
     initAddCartImgHover: function () {
         $('.add-to-cart').on('click', function () {
-            let cart = $('#cart-icon');
+            let cart = $('#cart');
             let imgToDrag = $(this).parents('.card').find('img').eq(0);
             if (imgToDrag) {
                 let imgClone = imgToDrag.clone()
@@ -89,6 +100,28 @@ export let dom = {
                     $(this).detach()
                 });
             }
+        });
+    },
+
+    handleNav: function () {
+        let nav = document.querySelector('.sidebar');
+        let container = document.querySelector('.container-fluid');
+        let topRow = container.querySelector('#top-row');
+        console.log(nav.style.width);
+        if (nav.style.width === '0px' || nav.style.width === "") {
+            nav.style.width = '250px';
+            container.style.marginLeft = "250px";
+            topRow.style.left = "250px";
+        } else {
+            nav.style.width = '0px'
+            container.style.marginLeft = "0px";
+            topRow.style.left = "0";
+        }
+    },
+
+    initNav: function () {
+        document.querySelector('#nav-toggle').addEventListener('click', () => {
+            this.handleNav();
         });
     }
 };
