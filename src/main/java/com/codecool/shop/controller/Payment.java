@@ -2,6 +2,7 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.CartDao;
+import com.codecool.shop.dao.implementationWithJDBC.AddressDaoJDBC;
 import com.codecool.shop.dao.implementationWithJDBC.OrderDaoJDBC;
 import com.codecool.shop.dao.implementationWithList.CartDaoMem;
 import com.codecool.shop.model.Cart;
@@ -34,8 +35,10 @@ public class Payment extends HttpServlet {
 
         Order order = new Order(cart, firstName, lastName, email, country, state, address, zip);
 
+        AddressDaoJDBC.getInstance().add(order.getAddress());
         OrderDaoJDBC.getInstance().add(order.getCartString());
-        System.out.println("billing address: " + order.getCartString());
+        System.out.println("order: " + order.getCartString());
+        System.out.println("address: " + order.getAddress());
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());

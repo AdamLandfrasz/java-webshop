@@ -11,12 +11,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class OrderDaoJDBC {
+
     private static OrderDaoJDBC instance = null;
     private List<Product> orders = new ArrayList<>();
 
@@ -32,7 +34,9 @@ public class OrderDaoJDBC {
 
     public void add(String cart) {
 
-        String query = String.format("INSERT INTO paid_order(cart, date) VALUES (%s,'time')",cart);
+        String now = Long.toString(Instant.now().getEpochSecond());
+
+        String query = String.format("INSERT INTO paid_order(cart, date) VALUES (%s, %s)",cart, now);
         System.out.println(query);
         ConnectionUtil.executeQuery(query);
     }

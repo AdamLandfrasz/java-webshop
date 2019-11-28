@@ -1,12 +1,14 @@
 package com.codecool.shop.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Order {
 
     private Cart cart;
-    private Map<String, String> address = new HashMap<>();
+    private List<String> address = new ArrayList<>();
 
     public Order(Cart cart, String firstName, String lastName, String email, String address, String country, String state, String zip) {
         this.cart = cart;
@@ -15,18 +17,23 @@ public class Order {
 
     private void setAddress(String firstName, String lastName, String email, String address, String country, String state, String zip) {
 
-        this.address.put("firstName", firstName);
-        this.address.put("lastName", lastName);
-        this.address.put("email", email);
-        this.address.put("address", address);
-        this.address.put("country", country);
-        this.address.put("state", state);
-        this.address.put("zip", zip);
+        this.address.add(firstName);
+        this.address.add(lastName);
+        this.address.add(email);
+        this.address.add(address);
+        this.address.add(country);
+        this.address.add(state);
+        this.address.add(zip);
+    }
+
+    public List<String> getAddress() {
+
+        return this.address;
     }
 
 
     public String getCartString(){
-        return "'" + this.address.toString() + "'";
+        return "'" + this.cart.toString() + "'";
     }
 
 

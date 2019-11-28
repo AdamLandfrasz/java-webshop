@@ -48,14 +48,14 @@ CREATE TABLE billing_address
 CREATE TABLE paid_order
 (
     id SERIAL PRIMARY KEY NOT NULL,
-    fk_billing_address_id INT REFERENCES billing_address(id) ON DELETE CASCADE,
+    fk_billing_address_id SERIAL,
     cart TEXT,
     date TEXT
 );
 
 INSERT INTO billing_address(firstName, lastName, email, address, country, state, zip) VALUES ('Sziki', 'Anaconda', 'xxdota2masterxx@gmail.com', 'fo ut, 69', 'nubia', 'summoner''s rift', '69420');
 
-INSERT INTO paid_order(fk_billing_address_id, cart, date) VALUES (1, 'sajttal-sonkaval toltott pulykacici,hasabburgonya, majonez', '2069-13-32');
+INSERT INTO paid_order(cart, date) VALUES ('sajttal-sonkaval toltott pulykacici,hasabburgonya, majonez', '2069-13-32');
 
 INSERT INTO supplier(name, description, products) VALUES ('Sony Interactive Entertainment', 'Video games and gaming console network services', '{1}');
 INSERT INTO supplier(name, description, products) VALUES ('Rockstar Games', 'Video game development', '{2}');
