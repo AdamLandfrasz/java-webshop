@@ -189,3 +189,52 @@ td img {
         height: 30px;
     }
 }
+
+a {
+    text-decoration: none;
+    color: #212529;
+}
+
+a:hover{
+    text-decoration: none;
+    color: #dc3545;
+}
+
+#product-table{
+
+    width: 75%;
+    margin: 100px auto;
+}
+
+#product-img {
+    height: 600px;
+    width: auto;
+}
+
+#product-name {
+    position: center;
+    font-size: 55px;
+}
+
+#product-desc {
+    position: center;
+    font-size: 25px;
+}
+
+#order-product{
+    width: 250px;
+}
+
+#product-price{
+    font-size: 50px;
+    width: 250px;
+}
+
+.product-add-to-cart{
+transform: scale(1.5);
+}
+
+
+.footer-s{
+
+}

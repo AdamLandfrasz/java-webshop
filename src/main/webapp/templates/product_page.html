@@ -38,26 +38,35 @@
         <img id="logo" src="/static/img/nav_img.png" alt="navbar-img">
     </a>
 </nav>
-<div class="container">
-    <div id="product-img">
-        <img class="" src="http://placehold.it/400x250/000/fff"
-             th:attr="src='/static/img/product_' + ${product.id} + '.jpg'" alt=""/>
-    </div>
-    <div id="product-description">
-        <h3 th:text="${product.name}" >Product name</h3>
-        <p th:text="${product.description}" >Product description</p>
-    </div>
-    <div id="order-product">
-        <h2>price</h2>
-        <p th:text="${product.price}" >price</p>
-        <div class="card-text">
-            <a class="btn btn-success add-to-cart" th:data-id="${product.getId()}">Add to cart</a>
-        </div>
-    </div>
-</div>
+
+<table id="product-table" class="text-center">
+    <tr>
+        <td rowspan="2">
+
+            <img id="product-img" src="http://placehold.it/400x250/000/fff"
+                 th:attr="src='/static/img/product_' + ${product.id} + '.jpg'" alt=""/>
+        </td>
+        <td>
+            <div id="product-name" th:text="${product.name}">Product name
+            </div>
+        </td>
+        <td rowspan="2">
+            <div id="product-price" th:text="${product.price}">price</div>
+
+
+                <a class="product-add-to-cart btn btn-success add-to-cart" th:data-id="${product.getId()}">Add to cart</a>
+
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div id="product-desc" th:text="${product.description}">Product description</div>
+        </td>
+    </tr>
+</table>
+</body>
 <div class="footer-s">
     <p>A.C.E. Development Team</p>
     <div>&copy; 2019 Codecool Budapest</div>
 </div>
-</body>
 </html>

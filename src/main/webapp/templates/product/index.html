@@ -36,7 +36,8 @@
 <body>
 
 <nav class="navbar fixed-top" id="top-row">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent"
+            aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
         <img id="nav-icon" src="/static/img/bars-solid.svg" alt="filter-toggle">
     </button>
 
@@ -52,31 +53,36 @@
     </a>
 </nav>
 
-<div class="flex-column nav-pills collapse filter" id="navbarToggleExternalContent" role="tablist" aria-orientation="horizontal">
-    <a th:each="category : ${categories}" th:text="${category.getName()}" th:class="${selectedCategoryId == category.getId() ? 'nav-link active' : 'nav-link'}" th:href="'/?category=' + ${category.getId()}" role="tab">Category</a>
+<div class="flex-column nav-pills collapse filter" id="navbarToggleExternalContent" role="tablist"
+     aria-orientation="horizontal">
+    <a th:each="category : ${categories}" th:text="${category.getName()}"
+       th:class="${selectedCategoryId == category.getId() ? 'nav-link active' : 'nav-link'}"
+       th:href="'/?category=' + ${category.getId()}" role="tab">Category</a>
 </div>
 
 <div class="container">
     <div id="products" class="row">
         <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3" th:each="prod,iterStat : ${products}">
-            <div class="card">
-                <div class="card-img-container card-img-top">
-                    <img class="" src="http://placehold.it/400x250/000/fff"
-                         th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""/>
-                </div>
-                <div class="card-header">
-                    <h4 class="card-title" th:text="${prod.name}">Product name</h4>
-                    <p class="card-text" th:text="${prod.description}">Product description... </p>
-                </div>
-                <div class="card-b">
-                    <div class="card-text">
-                        <div class="lead" th:text="${prod.getPrice()}">100 USD</div>
+            <a th:href="@{/product(id=${prod.id})}">
+                <div class="card">
+                    <div class="card-img-container card-img-top">
+                        <img class="" src="http://placehold.it/400x250/000/fff"
+                             th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""/>
                     </div>
-                    <div class="card-text">
-                        <a class="btn btn-success add-to-cart" th:data-id="${prod.getId()}">Add to cart</a>
+                    <div class="card-header">
+                        <h4 class="card-title" th:text="${prod.name}">Product name</h4>
+                        <p class="card-text" th:text="${prod.description}">Product description... </p>
+                    </div>
+                    <div class="card-b">
+                        <div class="card-text">
+                            <div class="lead" th:text="${prod.getPrice()}">100 USD</div>
+                        </div>
+                        <div class="card-text">
+                            <a class="btn btn-success add-to-cart" th:data-id="${prod.getId()}">Add to cart</a>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 </div>
