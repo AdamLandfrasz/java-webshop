@@ -33,6 +33,11 @@ public class ProductDaoMem implements ProductDao {
         data.add(product);
     }
 
+    ArrayList<String> testResult;
+
+    List<ArrayList> testL = new ArrayList<>();
+
+
     @Override
     public Product find(int id) {
         return data.stream().filter(t -> t.getId() == id).findFirst().orElse(null);

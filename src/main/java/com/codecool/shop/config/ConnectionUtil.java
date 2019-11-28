@@ -27,7 +27,7 @@ public class ConnectionUtil {
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)
         ) {
-            statement.execute(query);
+            statement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }

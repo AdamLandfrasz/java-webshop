@@ -48,16 +48,46 @@
             <tr>
                 <th scope="col"></th>
                 <th scope="col">Product Name</th>
+                <th scope="col">Price</th>
                 <th scope="col" class="text-center">Amount in cart</th>
+                <th scope="col">SumPrice</th>
             </tr>
             </thead>
             <tbody id="table-body-content">
             <tr th:each="prod, iterStat : ${cart}">
-                <td class="text-center"><img class="img" th:src="'/static/img/product_' + ${prod.getKey().getId()} + '.jpg'" alt="">
+                <td class="text-center"><img class="img"
+                                             th:src="'/static/img/product_' + ${prod.getKey().getId()} + '.jpg'" alt="">
                 </td>
                 <td class="align-middle" th:text="${prod.getKey().getName()}">Name</td>
-                <td class="align-middle text-center"><input class="cart-input" th:data-id="${prod.getKey().getId()}" th:value="${prod.getValue()}"
-                           type="number" required min="0" value="1"></td>
+                <td class="align-middle"
+                    th:text="${prod.getKey().getDefaultPrice()+' '+prod.getKey().getDefaultCurrency()}">Price
+                </td>
+                <td class="align-middle text-center"><input class="cart-input" th:data-id="${prod.getKey().getId()}"
+                                                            th:value="${prod.getValue()}"
+                                                            type="number" required min="0" value="1"></td>
+                <td class="align-middle"
+                    th:text="${#numbers.formatDecimal(prod.getKey().getDefaultPrice()*prod.getValue(),0,2,'POINT')+' '+prod.getKey().getDefaultCurrency()}">
+                    Price
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5"></td>
+            </tr>
+            <tr >
+                <td colspan="3"></td>
+                <td class="align-middle">Summed Price:</td>
+                <td class="align-middle" th:text="${summedPrice + ' EUR'}"></td>
+            </tr>
+            <td colspan="4"></td>
+            <td class="align-middle">
+                <div>
+                    <a href="/cart/checkout">
+                        <button id="continue" class="btn btn-danger">
+                            Continue
+                        </button>
+                    </a>
+                </div>
+
             </tr>
             </tbody>
         </table>
@@ -65,12 +95,6 @@
     </div>
 
 </div>
-<div>
-    <a href="/cart/checkout">
-        <button id="continue" class="btn btn-danger">
-            Continue
-        </button>
-    </a>
-</div>
+
 </body>
 </html>

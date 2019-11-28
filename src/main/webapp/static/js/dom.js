@@ -2,7 +2,7 @@ import {dataHandler} from "./dataHandler.js";
 
 export let dom = {
     getCart: function (response) {
-        let cart = response
+        let cart = response;
         let tableContent = '';
 
         for (let product of cart) {
@@ -12,10 +12,12 @@ export let dom = {
                     <img class="img" src="/static/img/product_${product.id}.jpg" alt="">
                 </td>
                 <td class="align-middle">${product.name}</td>
+                <td class="align-middle">${product.price + " EUR"}</td>
                 <td class="align-middle text-center">
                     <input class="cart-input" data-id="${product.id}" value="${product.amount}"
                            type="number" required min="0" value="1">
                 </td>
+                <td class="align-middle">${product.price*product.amount + " EUR"}</td>
                 </tr>`
         }
         document.getElementById("table-body-content").innerHTML = tableContent;

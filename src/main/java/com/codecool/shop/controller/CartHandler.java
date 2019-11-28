@@ -27,7 +27,9 @@ public class CartHandler extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
         context.setVariable("cart", cart.getCart());
+        context.setVariable("summedPrice", cart.getCartPrice());
         engine.process("cart.html", context, resp.getWriter());
+
     }
 
 }
