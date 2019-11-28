@@ -84,6 +84,7 @@
     height: 38px;
     padding: 0.6rem;
     line-height: 1;
+    border: #9aa4ab 1px solid;
 }
 
 td img {
@@ -171,11 +172,12 @@ a:hover {
     height: 100%;
     width: 0;
     position: fixed;
-    top: 0;
     left: 0;
-    z-index: 50;
+    top: 0;
+    z-index: 500;
     padding-top: 80px;
     overflow-x: hidden;
+    overflow-y: hidden;
     background-color: rgba(2, 0, 36, 1);
     transition: 0.5s;
 }
