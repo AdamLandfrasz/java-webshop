@@ -33,10 +33,8 @@
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
 </head>
 <body>
-<nav class="navbar fixed-top" id="top-row">
-    <a href="/">
-        <img id="logo" src="/static/img/nav_img.png" alt="navbar-img">
-    </a>
+<nav class="navbar fixed-top navbar-dark" id="top-row">
+    <a href="/" class="navbar-brand text-center">A.C.E WEBSHOP</a>
 </nav>
 
 <table id="product-table" class="text-center">
@@ -54,7 +52,7 @@
             <div id="product-price" th:text="${product.price}">price</div>
 
 
-                <a class="product-add-to-cart btn btn-success add-to-cart" th:data-id="${product.getId()}">Add to cart</a>
+            <a class="product-add-to-cart btn btn-success add-to-cart" th:data-id="${product.getId()}">Add to cart</a>
 
         </td>
     </tr>
@@ -65,8 +63,4 @@
     </tr>
 </table>
 </body>
-<div class="footer-s">
-    <p>A.C.E. Development Team</p>
-    <div>&copy; 2019 Codecool Budapest</div>
-</div>
 </html>

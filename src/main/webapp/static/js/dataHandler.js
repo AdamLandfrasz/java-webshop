@@ -20,7 +20,7 @@ export let dataHandler = {
             method: 'GET',
             credentials: 'same-origin'
         })
-            .then(response => console.log(response.status));
+            .then(response => response.ok);
     },
 
     _api_post: function (url, data, callback) {
