@@ -1,4 +1,4 @@
-src/main/resources/connection.properties
+*.properties
 *.class
 
 # OS-X
