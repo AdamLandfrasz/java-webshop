@@ -8,8 +8,7 @@ CREATE TABLE supplier
 (
 id          SERIAL PRIMARY KEY NOT NULL,
 name        TEXT,
-description TEXT,
-products    INT[]
+description TEXT
 );
 
 CREATE TABLE product_category
@@ -17,10 +16,8 @@ CREATE TABLE product_category
 id          SERIAL PRIMARY KEY NOT NULL,
 name        TEXT,
 description TEXT,
-department  TEXT,
-products    INT[]
+department  TEXT
 );
-
 
 CREATE TABLE product
 (
@@ -36,43 +33,39 @@ CREATE TABLE product
 CREATE TABLE billing_address
 (
     id SERIAL PRIMARY KEY NOT NULL,
-    firstName TEXT,
-    lastName TEXT,
-    email TEXT,
-    address TEXT,
-    country TEXT,
-    state TEXT,
-    zip TEXT
+    firstName TEXT NOT NULL,
+    lastName TEXT NOT NULL,
+    email TEXT NOT NULL,
+    address TEXT NOT NULL,
+    country TEXT NOT NULL,
+    state TEXT NOT NULL,
+    zip TEXT NOT NULL
 );
 
 CREATE TABLE paid_order
 (
     id SERIAL PRIMARY KEY NOT NULL,
-    fk_billing_address_id SERIAL,
-    cart TEXT,
-    date TEXT
+    billing_address_id INT NOT NULL REFERENCES billing_address(id),
+    cart TEXT NOT NULL ,
+    date TIMESTAMP NOT NULL
 );
 
-INSERT INTO billing_address(firstName, lastName, email, address, country, state, zip) VALUES ('Sziki', 'Anaconda', 'xxdota2masterxx@gmail.com', 'fo ut, 69', 'nubia', 'summoner''s rift', '69420');
-
-INSERT INTO paid_order(cart, date) VALUES ('sajttal-sonkaval toltott pulykacici,hasabburgonya, majonez', '2069-13-32');
-
-INSERT INTO supplier(name, description, products) VALUES ('Sony Interactive Entertainment', 'Video games and gaming console network services', '{1}');
-INSERT INTO supplier(name, description, products) VALUES ('Rockstar Games', 'Video game development', '{2}');
-INSERT INTO supplier(name, description, products) VALUES ('Electronic Arts', 'Video game development', '{3}');
-INSERT INTO supplier(name, description, products) VALUES ('Ubisoft Entertainment', 'Video game development', '{4}');
-INSERT INTO supplier(name, description, products) VALUES ('Activision Publishing', 'Video game development', '{5}');
-INSERT INTO supplier(name, description, products) VALUES ('CD Project', 'Video game development', '{6}');
-INSERT INTO supplier(name, description, products) VALUES ('Nintendo Company', 'Video game development', '{7}');
-INSERT INTO supplier(name, description, products) VALUES ('From Software', 'Video game development', '{8}');
-INSERT INTO supplier(name, description, products) VALUES ('Remedy Entertainment', 'Video game development', '{9}');
-INSERT INTO supplier(name, description, products) VALUES ('Capcom', 'Video game development', '{10}');
+INSERT INTO supplier(name, description) VALUES ('Sony Interactive Entertainment', 'Video games and gaming console network services');
+INSERT INTO supplier(name, description) VALUES ('Rockstar Games', 'Video game development');
+INSERT INTO supplier(name, description) VALUES ('Electronic Arts', 'Video game development');
+INSERT INTO supplier(name, description) VALUES ('Ubisoft Entertainment', 'Video game development');
+INSERT INTO supplier(name, description) VALUES ('Activision Publishing', 'Video game development');
+INSERT INTO supplier(name, description) VALUES ('CD Project', 'Video game development');
+INSERT INTO supplier(name, description) VALUES ('Nintendo Company', 'Video game development');
+INSERT INTO supplier(name, description) VALUES ('From Software', 'Video game development');
+INSERT INTO supplier(name, description) VALUES ('Remedy Entertainment', 'Video game development');
+INSERT INTO supplier(name, description) VALUES ('Capcom', 'Video game development');
 
 
-INSERT INTO product_category(name, description, department, products) VALUES ('PlayStation 4', 'Gaming Platform', 'Gaming console developed and maintained by Sony Entertainment Inc.', '{1,2,3,5,8,11,16,17,18,19,20,23,26,27,30,33}');
-INSERT INTO product_category(name, description, department, products) VALUES ('XboxOne', 'Gaming Platform', 'Gaming console developed and maintained by Microsoft.', '{6,9,12,21,24,28,31,34}');
-INSERT INTO product_category(name, description, department, products) VALUES ('PC', 'Gaming Platform', 'Personal computer.', '{4,7,10,13,22,25,29,32,35}');
-INSERT INTO product_category(name, description, department, products) VALUES ('Nintendo Switch', 'Gaming Platform', 'Gaming console developed and maintained by Nintendo.', '{14,15}');
+INSERT INTO product_category(name, description, department) VALUES ('PlayStation 4', 'Gaming Platform', 'Gaming console developed and maintained by Sony Entertainment Inc.');
+INSERT INTO product_category(name, description, department) VALUES ('XboxOne', 'Gaming Platform', 'Gaming console developed and maintained by Microsoft.');
+INSERT INTO product_category(name, description, department) VALUES ('PC', 'Gaming Platform', 'Personal computer.');
+INSERT INTO product_category(name, description, department) VALUES ('Nintendo Switch', 'Gaming Platform', 'Gaming console developed and maintained by Nintendo.');
 
 
 INSERT INTO product(name, description, default_price, default_currency, product_category, supplier) VALUES ('God of War', 'Journey into the fearsome Norse wilds where Kratos must master his legendary rage - not only to learn from his bloody past... but to give his son a future.', 59.99, 'EUR', 1, 1);
@@ -107,8 +100,3 @@ INSERT INTO product(name, description, default_price, default_currency, product_
 INSERT INTO product(name, description, default_price, default_currency, product_category, supplier) VALUES ('Control', 'Take part in Jesse''s supernatural action-adventure, that will challenge you to master the combination of supernatural abilities, modifiable loadouts, and reactive environments while fighting through a deep and unpredictable world.', 59.99, 'EUR', 1, 9);
 INSERT INTO product(name, description, default_price, default_currency, product_category, supplier) VALUES ('Control', 'Take part in Jesse''s supernatural action-adventure, that will challenge you to master the combination of supernatural abilities, modifiable loadouts, and reactive environments while fighting through a deep and unpredictable world.', 59.99, 'EUR', 2, 9);
 INSERT INTO product(name, description, default_price, default_currency, product_category, supplier) VALUES ('Control', 'Take part in Jesse''s supernatural action-adventure, that will challenge you to master the combination of supernatural abilities, modifiable loadouts, and reactive environments while fighting through a deep and unpredictable world.', 59.99, 'EUR', 3, 9);
-
-
-
-
-

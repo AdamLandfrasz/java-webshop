@@ -33,12 +33,14 @@ public class Payment extends HttpServlet {
         String address = req.getParameter("address");
         String zip = req.getParameter("zip");
 
-        Order order = new Order(cart, firstName, lastName, email, country, state, address, zip);
+        Order order = new Order(cart, firstName, lastName, email, address, country, state, zip);
 
-        AddressDaoJDBC.getInstance().add(order.getAddress());
-        OrderDaoJDBC.getInstance().add(order.getCartString());
-        System.out.println("order: " + order.getCartString());
-        System.out.println("address: " + order.getAddress());
+        int addressId = AddressDaoJDBC.getInstance().getEntryId(order.getBillingDetails());
+        if (addressId == 0) {
+            AddressDaoJDBC.getInstance().add(order.getBillingDetails());
+            addressId = AddressDaoJDBC.getInstance().getEntryId(order.getBillingDetails());
+        }
+        OrderDaoJDBC.getInstance().add(order.getCartString(), addressId);
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());

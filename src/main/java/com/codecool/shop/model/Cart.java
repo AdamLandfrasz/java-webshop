@@ -35,7 +35,6 @@ public class Cart extends BaseModel {
     public String toString() {
         return "Cart{" + cart + "}";
     }
-    
 
     public float getCartPrice (){
         float price = 0;

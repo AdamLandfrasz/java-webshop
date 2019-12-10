@@ -1,40 +1,38 @@
 package com.codecool.shop.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.google.gson.Gson;
+
+import java.util.*;
 
 public class Order {
 
     private Cart cart;
-    private List<String> address = new ArrayList<>();
+    private Map<String, String> billingDetails = new HashMap<>();
+    public static final List<String> BILLING_KEYS = Arrays.asList("firstName", "lastName", "email", "address", "country", "state", "zip");
 
     public Order(Cart cart, String firstName, String lastName, String email, String address, String country, String state, String zip) {
         this.cart = cart;
-        setAddress(firstName, lastName, email, address, country, state, zip);
+        setAddress(Arrays.asList(firstName, lastName, email, address, country, state, zip));
     }
 
-    private void setAddress(String firstName, String lastName, String email, String address, String country, String state, String zip) {
-
-        this.address.add(firstName);
-        this.address.add(lastName);
-        this.address.add(email);
-        this.address.add(address);
-        this.address.add(country);
-        this.address.add(state);
-        this.address.add(zip);
+    private void setAddress(List<String> billingDetailsString) {
+        for (int i = 0; i < BILLING_KEYS.size(); i++) {
+            billingDetails.put(BILLING_KEYS.get(i), billingDetailsString.get(i));
+        }
     }
 
-    public List<String> getAddress() {
-
-        return this.address;
+    public Map<String, String> getBillingDetails() {
+        return this.billingDetails;
     }
-
 
     public String getCartString(){
-        return "'" + this.cart.toString() + "'";
+        List<Map<String, Integer>> dbCart = new ArrayList<>();
+        this.cart.getCart().keySet().forEach(key -> {
+            Map<String, Integer> productEntry = new HashMap<>();
+            productEntry.put("productId", key.id);
+            productEntry.put("cartAmount", this.cart.getCart().get(key));
+            dbCart.add(productEntry);
+        });
+        return new Gson().toJson(dbCart);
     }
-
-
 }
