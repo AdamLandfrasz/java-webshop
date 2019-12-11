@@ -15,6 +15,7 @@ import java.util.Map;
 
 public class AddressDaoJDBC {
     private static AddressDaoJDBC instance = null;
+
     private AddressDaoJDBC() {
     }
 
@@ -26,10 +27,8 @@ public class AddressDaoJDBC {
     }
 
     public void add(Map<String, String> address) {
-
         List<String> values = new ArrayList<>();
-
-            for (String key : Order.BILLING_KEYS) {
+        for (String key : Order.BILLING_KEYS) {
             values.add("'" + address.get(key) + "'");
         }
         String query = String.format("INSERT INTO billing_address(firstname, lastname, email, address, country, state, zip) VALUES (%s, %s, %s, %s, %s, %s, %s)",
@@ -51,7 +50,6 @@ public class AddressDaoJDBC {
 
     private Map<String, String> fetchOne(String query) {
         Map<String, String> result = null;
-
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(query);
              ResultSet resultSet = statement.executeQuery()

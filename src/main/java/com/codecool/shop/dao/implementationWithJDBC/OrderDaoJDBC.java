@@ -22,7 +22,6 @@ import java.util.stream.Collectors;
 public class OrderDaoJDBC {
 
     private static OrderDaoJDBC instance = null;
-    private List<Product> orders = new ArrayList<>();
 
     private OrderDaoJDBC() {
     }
@@ -36,7 +35,7 @@ public class OrderDaoJDBC {
 
     public void add(String cart, int addressId) {
         if (addressId != 0) {
-            String query = String.format("INSERT INTO paid_order(billing_address_id, cart, date) VALUES (%d, '%s', 'now')", addressId, cart);
+            String query = String.format("INSERT INTO paid_order(billing_address_id, cart) VALUES (%d, '%s')", addressId, cart);
             ConnectionUtil.executeQuery(query);
         }
     }

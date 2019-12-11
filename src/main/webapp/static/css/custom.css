@@ -54,7 +54,7 @@
     margin: 0 0 11px;
 }
 
-.container {
+.container-on-top {
     margin-top: 100px;
 }
 
@@ -62,11 +62,6 @@
     margin-bottom: 15px;
     font-size: 1rem;
 }
-
-/*.card-img-container img{*/
-/*    min-height: 12.5rem;*/
-/*    max-height: 12.5rem;*/
-/*}*/
 
 .card-header {
     height: 8rem;
@@ -193,4 +188,25 @@ a:hover {
 
 .sidebar a:hover {
     color: #ffffff;
+}
+
+.paypal-buttons {
+    text-align: center;
+}
+
+.payment-heading{
+    width: fit-content;
+    margin: 0 auto 30px auto;
+}
+
+.order-container {
+    transition: 0.7s;
+    max-height: 1000px;
+    overflow: hidden;
+}
+
+.address-container {
+    transition: 0.7s;
+    max-height: 0;
+    overflow: hidden;
 }

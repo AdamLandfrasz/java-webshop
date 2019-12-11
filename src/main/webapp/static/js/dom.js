@@ -123,5 +123,26 @@ export let dom = {
         document.querySelector('#nav-toggle').addEventListener('click', () => {
             this.handleNav();
         });
+    },
+
+    initCheckout: function () {
+        let addressOpenBtn = document.querySelector('#address-open');
+        let orderContainer = document.querySelector('.order-container');
+        let addressContainer = document.querySelector('.address-container');
+        addressOpenBtn.addEventListener('click', function () {
+            if (addressOpenBtn.dataset.open === '0') {
+                addressOpenBtn.dataset.open = '1';
+                addressOpenBtn.innerText = 'Back to your order';
+
+                orderContainer.style.maxHeight = '0';
+                addressContainer.style.maxHeight = '1000px';
+            } else {
+                addressOpenBtn.dataset.open = '0';
+                addressOpenBtn.innerText = 'Continue to billing details';
+
+                orderContainer.style.maxHeight = '1000px';
+                addressContainer.style.maxHeight = '0';
+            }
+        });
     }
 };

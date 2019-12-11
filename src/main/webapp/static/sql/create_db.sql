@@ -47,7 +47,7 @@ CREATE TABLE paid_order
     id SERIAL PRIMARY KEY NOT NULL,
     billing_address_id INT NOT NULL REFERENCES billing_address(id),
     cart TEXT NOT NULL ,
-    date TIMESTAMP NOT NULL
+    date TIMESTAMP NOT NULL DEFAULT now()
 );
 
 INSERT INTO supplier(name, description) VALUES ('Sony Interactive Entertainment', 'Video games and gaming console network services');
