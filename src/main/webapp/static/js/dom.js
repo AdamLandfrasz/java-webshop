@@ -106,7 +106,7 @@ export let dom = {
     handleNav: function () {
         let nav = document.querySelector('.sidebar');
         let container = document.querySelector('.container-fluid');
-        let topRow = container.querySelector('#top-row');
+        let topRow = document.querySelector('#top-row');
         if (nav.style.width === '0px' || nav.style.width === "") {
             nav.style.width = '250px';
             container.style.marginLeft = "250px";

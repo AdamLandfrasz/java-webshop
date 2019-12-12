@@ -23,6 +23,8 @@
             crossorigin="anonymous"></script>
 
     <script src="/static/js/initProducts.js" type="module"></script>
+    <script src="/static/js/initAddCartButtons.js" type="module"></script>
+    <script src="/static/js/initLogin.js" type="module"></script>
 
     <!-- Latest compiled and minified CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
@@ -60,11 +62,11 @@
                             <img class="img-fluid" src="http://placehold.it/400x250/000/fff"
                                  th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""/>
                         </div>
-                        <div class="card-header">
+                        <div class="card-header card-header-custom">
                             <p class="card-title" th:text="${prod.name}">Product name</p>
                         </div>
                     </a>
-                    <div class="card-bottom">
+                    <div class="card-bottom-custom">
                         <div class="" th:text="${prod.getPrice()}">100 USD</div>
                         <a class="add-to-cart" th:data-id="${prod.getId()}">
                             <button class="btn">

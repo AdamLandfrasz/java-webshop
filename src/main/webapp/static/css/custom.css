@@ -71,15 +71,23 @@ body {
     font-size: 1rem;
 }
 
-.card-header {
+.card-header-custom {
     height: 8rem;
 }
 
-.card-bottom {
+.card-bottom-custom, .card-bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0.7rem;
+}
+
+.card-bottom, .card-title-custom {
+    font-size: 1.5rem;
+}
+
+.card-description {
+    font-size: 1rem;
 }
 
 .add-to-cart button {
@@ -134,12 +142,12 @@ a:hover {
 
 #product-name {
     position: center;
-    font-size: 55px;
+    font-size: 3rem;
 }
 
 #product-desc {
     position: center;
-    font-size: 25px;
+    font-size: 1.3rem;
 }
 
 #order-product {
@@ -147,7 +155,7 @@ a:hover {
 }
 
 #product-price {
-    font-size: 50px;
+    font-size: 1.5rem;
     width: 250px;
 }
 

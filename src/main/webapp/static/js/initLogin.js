@@ -1,7 +1,7 @@
 import {dom} from "./dom.js";
 
 function main() {
-    dom.initNav();
+    dom.initModalRegister();
 }
 
 main();
