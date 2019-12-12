@@ -153,12 +153,12 @@ export let dom = {
                 `<form action="/register" method="post">
                     <div class="mb-3">
                         <label for="firstName">First name</label>
-                        <input type="text" name="first-name" class="form-control" id="firstName" placeholder="" value=""
+                        <input type="text" name="first_name" class="form-control" id="firstName" placeholder="" value=""
                                required>
                     </div>
                     <div class="mb-3">
                         <label for="lastName">Last name</label>
-                        <input type="text" name="last-name" class="form-control" id="lastName" placeholder="" value=""
+                        <input type="text" name="last_name" class="form-control" id="lastName" placeholder="" value=""
                                required>
                     </div>
                     <div class="mb-3">

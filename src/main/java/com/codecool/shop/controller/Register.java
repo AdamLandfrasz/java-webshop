@@ -22,16 +22,13 @@ public class Register extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-
         String firstName = req.getParameter("first_name");
         String lastName = req.getParameter("last_name");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
-
-
         if (!UserDaoJDBC.getInstance().checkIfEmailIsAlreadyUsed(email)) {
-            byte[] hashedPassword = PasswordUtil.hashPassword(password);
+            String hashedPassword = PasswordUtil.hashPassword(password);
             UserDaoJDBC.getInstance().add(firstName, lastName, email, hashedPassword);
         }
 

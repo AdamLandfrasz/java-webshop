@@ -28,13 +28,13 @@ public class UserDaoJDBC {
 
     public void add(String firstName, String lastName, String email, String password) {
 
-        String query = String.format("INSERT INTO users(first_name, last_name, email, hashed_password,) VALUES (%s, %s, %s, %s)",
+        String query = String.format("INSERT INTO users(first_name, last_name, email, hashed_password) VALUES ('%s', '%s', '%s', '%s')",
                 firstName, lastName, email, password);
         ConnectionUtil.executeQuery(query);
     }
 
     public boolean checkIfEmailIsAlreadyUsed(String email) {
-        String query = "Select email FROM users WHERE email=" + email;
+        String query = String.format("SELECT email FROM users WHERE email='%s'", email);
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(query);
              ResultSet resultSet = statement.executeQuery()
@@ -51,13 +51,13 @@ public class UserDaoJDBC {
     }
 
     public String getPasswordByEmail(String email) {
-        String query = "Select password FROM users WHERE email=" + email;
+        String query = String.format("SELECT hashed_password FROM users WHERE email='%s'", email);
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(query);
              ResultSet resultSet = statement.executeQuery()
         ) {
             if (resultSet.next()) {
-                return resultSet.getString("password");
+                return resultSet.getString("hashed_password");
             } else {
                 return null;
             }
