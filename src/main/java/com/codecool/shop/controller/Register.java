@@ -1,10 +1,12 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.config.PasswordUtil;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementationWithJDBC.ProductCategoryDaoJDBC;
 import com.codecool.shop.dao.implementationWithJDBC.ProductDaoJDBC;
+import com.codecool.shop.dao.implementationWithJDBC.UserDaoJDBC;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -19,10 +21,14 @@ public class Register extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        UserDaoJDBC userDaoJDBC = new UserDaoJDBC();
 
-
+        String firstName = req.getParameter("first_name");
+        String lastName = req.getParameter("last_name");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
+
+        byte[] hashedPassword = PasswordUtil.hashPassword(password);
 
 
         resp.sendRedirect("/");

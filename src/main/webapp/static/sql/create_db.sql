@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS supplier;
 DROP TABLE IF EXISTS product_category;
 DROP TABLE IF EXISTS paid_order;
 DROP TABLE IF EXISTS billing_address;
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE supplier
 (
@@ -48,6 +49,13 @@ CREATE TABLE paid_order
     billing_address_id INT NOT NULL REFERENCES billing_address(id),
     cart TEXT NOT NULL ,
     date TIMESTAMP NOT NULL DEFAULT now()
+);
+
+CREATE TABLE users (
+    first_name TEXT NOT NULL,
+    last_name TEXT NOT NULL,
+    email TEXT NOT NULL,
+    hashed_password TEXT NOT NULL
 );
 
 INSERT INTO supplier(name, description) VALUES ('Sony Interactive Entertainment', 'Video games and gaming console network services');
