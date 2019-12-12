@@ -35,17 +35,22 @@
 
 <body>
 <div class="container-fluid">
-    <nav class="navbar fixed-top navbar-dark" id="top-row">
+    <nav class="navbar navbar-expand fixed-top navbar-dark" id="top-row">
         <button class="btn" id="nav-toggle">
             <img class="nav-icon img-fluid" src="/static/img/bars-solid-white.png" alt="filter-toggle">
         </button>
 
         <a href="/" class="navbar-brand text-center">A.C.E WEBSHOP</a>
-        <a href="/cart" class="nav-item">
-            <button class="btn" id="cart">
-                <img class="nav-icon img-fluid" src="/static/img/cart.png" alt="shopping-cart">
+        <div>
+            <button class="btn nav-item" data-toggle="modal" data-target="#login-modal">
+                <img class="nav-icon img-fluid" id="user" src="/static/img/user.png" alt="user-login">
             </button>
-        </a>
+            <a href="/cart" class="nav-item">
+                <button class="btn" id="cart">
+                    <img class="nav-icon img-fluid" src="/static/img/cart.png" alt="shopping-cart">
+                </button>
+            </a>
+        </div>
     </nav>
     <div class="container container-on-top">
         <div id="products" class="row">
@@ -95,18 +100,16 @@
                     </div>
                     <div class="mb-3">
                         <label for="password">Password</label>
-                        <input type="password" name="password" class="form-control" id="password" placeholder="password"
+                        <input type="password" name="password" class="form-control" id="password" placeholder=""
                                required>
                     </div>
-
                     <button class="btn btn-danger btn-lg btn-block" type="submit">Login</button>
-
+                    <hr class="mb-4">
+                    <button class="btn btn-primary btn-lg btn-block" id="register" type="Button">Register</button>
                 </form>
             </div>
         </div>
-
     </div>
 </div>
-<button class="btn btn-primary" data-toggle="modal" data-target="#login-modal">login</button>
 </body>
 </html>
