@@ -2,6 +2,10 @@
     margin-right: 5px;
 }
 
+body {
+    overflow-x: hidden;
+}
+
 .thumbnail {
     margin-bottom: 20px;
     padding: 0px;
@@ -91,12 +95,13 @@ td img {
     height: 2rem;
 }
 
-.navbar-toggler {
-    padding: 0;
-    border: none;
+#user {
+    width: 1.8rem;
+    height: 2rem;
 }
 
 .navbar {
+    justify-content: space-between;
     background: rgb(2, 0, 36);
     background: linear-gradient(170deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 0.9) 35%, rgba(0, 171, 206, 0.8) 100%)
 }
@@ -209,11 +214,4 @@ a:hover {
     transition: 0.7s;
     max-height: 0;
     overflow: hidden;
-}
-
-.login-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 500000;
 }
