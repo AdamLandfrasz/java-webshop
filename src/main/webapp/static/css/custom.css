@@ -1,3 +1,7 @@
+body{
+    overflow-x: hidden;
+}
+
 .glyphicon {
     margin-right: 5px;
 }
@@ -171,8 +175,7 @@ a:hover {
     top: 0;
     z-index: 500;
     padding-top: 80px;
-    overflow-x: hidden;
-    overflow-y: hidden;
+    overflow: hidden;
     background-color: rgba(2, 0, 36, 1);
     transition: 0.5s;
 }
