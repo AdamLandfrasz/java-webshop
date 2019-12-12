@@ -107,11 +107,11 @@ export let dom = {
         let nav = document.querySelector('.sidebar');
         let container = document.querySelector('.container-fluid');
         let topRow = container.querySelector('#top-row');
-        console.log(nav.style.width);
         if (nav.style.width === '0px' || nav.style.width === "") {
             nav.style.width = '250px';
             container.style.marginLeft = "250px";
             topRow.style.left = "250px";
+
         } else {
             nav.style.width = '0px'
             container.style.marginLeft = "0px";
