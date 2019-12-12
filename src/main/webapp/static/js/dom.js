@@ -144,5 +144,83 @@ export let dom = {
                 addressContainer.style.maxHeight = '0';
             }
         });
+    },
+
+    initModalRegister: function () {
+        let registerButton = document.querySelector('#register');
+        registerButton.addEventListener('click', function () {
+            registerButton.parentElement.parentElement.innerHTML =
+                `<form action="/register" method="post">
+                    <div class="mb-3">
+                        <label for="firstName">First name</label>
+                        <input type="text" name="first-name" class="form-control" id="firstName" placeholder="" value=""
+                               required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastName">Last name</label>
+                        <input type="text" name="last-name" class="form-control" id="lastName" placeholder="" value=""
+                               required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email">Email</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">@</span>
+                            </div>
+                            <input type="email" name="email" class="form-control" id="email"
+                                   placeholder="you@example.com"
+                                   required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" class="form-control" id="password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password-again">Password again</label>
+                        <input type="password" name="password-again" class="form-control" id="password-again" required>
+                    </div>
+                    <button class="btn btn-danger btn-lg btn-block" id="register" type="submit">Register</button>
+                </form>`;
+            dom.addModalReset();
+        });
+    },
+
+    addModalReset: function () {
+        let loginModal = document.querySelector('#login-modal');
+        let modalContent = document.querySelector('.modal-content');
+        modalContent.addEventListener('click', function (e) {
+            e.stopPropagation();
+        });
+        loginModal.addEventListener('click', function () {
+            setTimeout(dom.handleModalReset, 500);
+        });
+    },
+
+    handleModalReset: function () {
+        let registerButton = document.querySelector('#register');
+        registerButton.parentElement.parentElement.innerHTML =
+            `<form action="/login" method="post">
+                    <div class="mb-3">
+                        <label for="email">Email</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">@</span>
+                            </div>
+                            <input type="email" name="email" class="form-control" id="email"
+                                   placeholder="you@example.com"
+                                   required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" class="form-control" id="password" "
+                               required>
+                    </div>
+                    <button class="btn btn-danger btn-lg btn-block" type="submit">Login</button>
+                    <hr class="mb-4">
+                    <button class="btn btn-primary btn-lg btn-block" id="register" type="Button">Register</button>
+                </form>`;
+        dom.initModalRegister();
     }
 };
