@@ -107,6 +107,12 @@ td img {
     height: 2rem;
 }
 
+.ace-brand {
+    font-size: 2rem;
+    font-weight: bold;
+    font-style: italic;
+}
+
 #user {
     width: 1.8rem;
     height: 2rem;
