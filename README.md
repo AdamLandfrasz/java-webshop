@@ -1,5 +1,5 @@
 # Codecool Online Shop
-####This was a 3 week webshop project we built using:
+#### This was a 3 week webshop project we built using:
     Java SE
     Maven
     Java Servlets
